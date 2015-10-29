@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:background="@color/background"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@mipmap/logo_splash"
+                android:padding="40dp"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="25dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center">
+
+                    <EditText
+                        android:id="@+id/txtCode1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/verification_edittext_selector"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:padding="10dp"
+
+                        android:textColor="@android:color/white"/>
+
+                    <EditText
+                        android:id="@+id/txtCode2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/verification_edittext_selector"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:padding="10dp"
+                        android:textColor="@android:color/white"/>
+
+                    <EditText
+                        android:id="@+id/txtCode3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/verification_edittext_selector"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:padding="10dp"
+                        android:textColor="@android:color/white"/>
+
+                    <EditText
+                        android:id="@+id/txtCode4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/verification_edittext_selector"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:padding="10dp"
+                        android:textColor="@android:color/white"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="Please enter four digit code."
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btnDone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
+                android:background="@drawable/btn_selector"
+                android:gravity="center"
+                android:onClick="doNe"
+                android:padding="10dp"
+                android:text="Done"
+                android:textAllCaps="false"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

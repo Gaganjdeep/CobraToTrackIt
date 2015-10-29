@@ -1,0 +1,11 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@mipmap/ic_car_unsel"
+          android:state_selected="false">
+
+    </item>
+    <item android:drawable="@mipmap/ic_car_sel"
+          android:state_selected="true">
+
+    </item>
+
+</selector>

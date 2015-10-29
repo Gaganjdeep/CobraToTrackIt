@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">CobraToTrackIt</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+
+    <string name="DoorsLock">Lock</string>
+    <string name="DoorsUnLock">UnLock</string>
+    <string name="alarm_off">Keypad Disarm</string>
+
+    <string name="connect_to_vehicle">Connect to vehicle</string>
+    <string name="enter_code">enter the SMS code</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="license_plate">License Plate</string>
+    <string name="email">E-mail</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="register_top_text">Please enter your information below.Your email address and phone number will become part of your cobra profile.</string>
+    <string name="tracking">Tracking</string>
+    <string name="please_try_again">Please try again.</string>
+    <string name="aboutUsText">When you need help on the road - every minute counts. We at the Kaftor center undertake a Quick response of up to 30 seconds by professional representatives who provide the link and guidance services - in addition to know how to operate all parties on the ground and update you in advance to you. We do not waste time on identifying - the kaftor will set us exactly who you are and where you are.</string>
+    <string name="title_activity_get_status">GetStatusActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="version_info">Version 1.0</string>
+    <string name="notifications">Notifications</string>
+    <string name="trip_report">Trip Reports</string>
+    <string name="address">Address</string>
+
+
+</resources>

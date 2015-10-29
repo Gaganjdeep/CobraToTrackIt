@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:gravity="center_vertical"
+              android:background="@color/background"
+
+    >
+
+
+    <!-- <View
+         android:id="@+id/line_noti"
+         android:layout_width="4dp"
+         android:visibility="gone"
+         android:layout_height="match_parent"
+         android:background="@color/red"/>-->
+
+
+    <ImageView
+        android:layout_margin="10dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_noti_red_i"/>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_gravity="center_vertical">
+
+
+        <TextView
+            android:id="@+id/txtv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="Gagan"
+            android:textSize="19sp"
+            />
+
+
+        <TextView
+            android:id="@+id/txtv_date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:textColor="@color/white"
+            android:text="time"
+            />
+
+
+        <TextView
+            android:id="@+id/txtv_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="100 km/hr"
+            />
+
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/btn_close_noti"
+        android:layout_margin="10dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="top"
+        android:visibility="gone"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"/>
+
+
+</LinearLayout>
