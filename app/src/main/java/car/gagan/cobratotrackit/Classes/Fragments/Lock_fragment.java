@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 
+import org.json.JSONObject;
+
 import car.gagan.cobratotrackit.R;
 
 import java.util.HashMap;
@@ -81,7 +83,20 @@ public class Lock_fragment extends BaseFragmentHome implements View.OnClickListe
                         if (dialog != null && dialog.isShowing())
                             dialog.dismiss();
 
-                        Utills_G.showToast(output, getActivity(), true);
+
+                        try
+                        {
+                            JSONObject jObj = new JSONObject(output);
+
+                            new Utills_G().show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
+
+
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+
 
 
                     }
@@ -100,7 +115,19 @@ public class Lock_fragment extends BaseFragmentHome implements View.OnClickListe
                         if (dialog != null && dialog.isShowing())
                             dialog.dismiss();
 
-                        Utills_G.showToast(output, getActivity(), true);
+                        try
+                        {
+                            JSONObject jObj = new JSONObject(output);
+
+                            new Utills_G().show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
+
+
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+
 
                     }
                 }).execute();
@@ -122,7 +149,19 @@ public class Lock_fragment extends BaseFragmentHome implements View.OnClickListe
                             dialog.dismiss();
 
 
-                        Utills_G.showToast(output, getActivity(), true);
+                        try
+                        {
+                            JSONObject jObj = new JSONObject(output);
+
+                            new Utills_G().show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
+
+
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+
 
                     }
                 }).execute();
