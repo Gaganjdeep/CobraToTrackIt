@@ -37,6 +37,11 @@ public class Splash_Cobra extends AppCompatActivity
         setContentView(R.layout.activity_splash__cobra);
 
 
+        SharedPreferences preference = getSharedPreferences("Preference", Context.MODE_PRIVATE);
+
+        Utills_G.change_language(preference.getString("language", "en"), Splash_Cobra.this);
+
+
         shrdPref = getSharedPreferences(Global_Constants.shared_pref_name, Context.MODE_PRIVATE);
 
 
@@ -154,7 +159,7 @@ public class Splash_Cobra extends AppCompatActivity
 
     private void tryAgain()
     {
-        Utills_G.show_dialog_msg(Splash_Cobra.this, "Some error has occured,Please try again.", new View.OnClickListener()
+        Utills_G.show_dialog_msg(Splash_Cobra.this, "Some error has occurred ,Please try again.", new View.OnClickListener()
         {
             @Override
             public void onClick(View view)

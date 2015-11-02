@@ -3,9 +3,13 @@ package car.gagan.cobratotrackit.utills;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 
+import car.gagan.cobratotrackit.Classes.Fragments.VehicleInfofragment;
 import car.gagan.cobratotrackit.R;
 
 /**
@@ -37,6 +41,22 @@ public class BaseFragmentHome extends Fragment
         dialog.setContentView(R.layout.progress_dialog);
 
         return dialog;
+    }
+
+
+    public String selectedLanguage()
+    {
+        SharedPreferences preference = getActivity().getSharedPreferences("Preference", Context.MODE_PRIVATE);
+
+        return preference.getString("language", "en");
+    }
+
+
+    public void attachFragmentVehicleInfo()
+    {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.layoutvehicleInfo, new VehicleInfofragment()).commit();
+
     }
 
 

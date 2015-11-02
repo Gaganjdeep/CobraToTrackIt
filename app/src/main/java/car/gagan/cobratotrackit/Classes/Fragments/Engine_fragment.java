@@ -40,24 +40,24 @@ public class Engine_fragment extends BaseFragmentHome implements View.OnClickLis
         // Required empty public constructor
     }
 
-    private static View v = null;
+    public static View vEngine = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
 
-        if (v == null)
-            v = inflater.inflate(R.layout.fragment_alarm, container, false);
+        if (vEngine == null)
+            vEngine = inflater.inflate(R.layout.fragment_alarm, container, false);
 
 
-        btnEngineOn = (Button) v.findViewById(R.id.btnEngineOn);
-        btnENgineOff = (Button) v.findViewById(R.id.btnENgineOff);
+        btnEngineOn = (Button) vEngine.findViewById(R.id.btnEngineOn);
+        btnENgineOff = (Button) vEngine.findViewById(R.id.btnENgineOff);
         btnEngineOn.setOnClickListener(this);
         btnENgineOff.setOnClickListener(this);
 
-
-        return v;
+        attachFragmentVehicleInfo();
+        return vEngine;
 
     }
 

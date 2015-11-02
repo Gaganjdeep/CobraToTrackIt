@@ -26,7 +26,7 @@ public class Settings extends android.support.v4.app.Fragment implements View.On
 {
 
 
-    LinearLayout layoutLogout;
+    private LinearLayout layoutLogout, layoutSelectLang;
 
 
     public Settings()
@@ -43,8 +43,10 @@ public class Settings extends android.support.v4.app.Fragment implements View.On
         View v = inflater.inflate(R.layout.fragment_settings, container, false);
 
         layoutLogout = (LinearLayout) v.findViewById(R.id.layoutLogout);
+        layoutSelectLang = (LinearLayout) v.findViewById(R.id.layoutSelectLang);
 
         layoutLogout.setOnClickListener(this);
+        layoutSelectLang.setOnClickListener(this);
 
 
         return v;
@@ -78,7 +80,7 @@ public class Settings extends android.support.v4.app.Fragment implements View.On
                         SharedPreferences shrdpref = getActivity().getSharedPreferences(Global_Constants.shared_pref_name, Context.MODE_PRIVATE);
                         SharedPreferences.Editor ed = shrdpref.edit();
                         ed.clear();
-                        ed.commit();
+                        ed.apply();
 
 
                         startActivity(new Intent(getActivity(), Splash_Cobra.class));
@@ -87,6 +89,15 @@ public class Settings extends android.support.v4.app.Fragment implements View.On
 
                     }
                 });
+
+
+                break;
+
+
+            case R.id.layoutSelectLang:
+
+
+                Utills_G.show_dialog_languageSelection(getActivity());
 
 
                 break;

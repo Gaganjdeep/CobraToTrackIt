@@ -37,7 +37,7 @@ public class Tracking_fragment extends BaseFragmentHome implements View.OnClickL
 
     private Dialog dialog;
 
-    private static View v = null;
+    public static View vTracking = null;
 
     public Tracking_fragment()
     {
@@ -49,17 +49,20 @@ public class Tracking_fragment extends BaseFragmentHome implements View.OnClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        if (v == null)
-            v = inflater.inflate(R.layout.fragment_tracking, container, false);
+        if (vTracking == null)
+            vTracking = inflater.inflate(R.layout.fragment_tracking, container, false);
 
 
-        btnStoptracking = (Button) v.findViewById(R.id.btnStoptracking);
-        btnStartTracking = (Button) v.findViewById(R.id.btnStartTracking);
+        btnStoptracking = (Button) vTracking.findViewById(R.id.btnStoptracking);
+        btnStartTracking = (Button) vTracking.findViewById(R.id.btnStartTracking);
         btnStartTracking.setOnClickListener(this);
         btnStoptracking.setOnClickListener(this);
 
 
-        return v;
+        attachFragmentVehicleInfo();
+
+
+        return vTracking;
 
     }
 

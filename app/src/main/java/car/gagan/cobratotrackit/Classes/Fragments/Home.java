@@ -25,6 +25,7 @@ import car.gagan.cobratotrackit.R;
 import car.gagan.cobratotrackit.Classes.MainActivity;
 import car.gagan.cobratotrackit.utills.CallBackDialogOption;
 import car.gagan.cobratotrackit.utills.DialogReveal;
+import car.gagan.cobratotrackit.utills.Global_Constants;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -153,6 +154,25 @@ public class Home extends android.support.v4.app.Fragment
 
         }
     }
+
+
+    public static void reStartFragments()
+    {
+
+        Lock_fragment.vLock = null;
+
+        Lights_fragment.vLights = null;
+
+        Engine_fragment.vEngine = null;
+
+        Tracking_fragment.vTracking = null;
+    }
+
+
+
+
+
+
 
 
 }

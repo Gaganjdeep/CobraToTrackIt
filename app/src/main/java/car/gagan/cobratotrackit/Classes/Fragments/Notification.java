@@ -28,6 +28,7 @@ import car.gagan.cobratotrackit.Adapters.NotificationAdapter;
 import car.gagan.cobratotrackit.Classes.MainActivity;
 import car.gagan.cobratotrackit.R;
 import car.gagan.cobratotrackit.model.EventsModel;
+import car.gagan.cobratotrackit.model.TripHistoryModel;
 import car.gagan.cobratotrackit.utills.BaseFragmentHome;
 import car.gagan.cobratotrackit.utills.CallBackWebService;
 import car.gagan.cobratotrackit.utills.Global_Constants;
@@ -40,7 +41,7 @@ public class Notification extends BaseFragmentHome
 
     private ListView listVnotifications;
 
-    private List<EventsModel> listData;
+    private static List<EventsModel> listData;
 
 
     public Notification()
@@ -67,13 +68,28 @@ public class Notification extends BaseFragmentHome
 
         listVnotifications = (ListView) v.findViewById(R.id.listVnotifications);
 
+
+        if (listData != null && listData.size() > 0)
+        {
+            listVnotifications.setAdapter(new NotificationAdapter(getActivity(), listData));
+            listVnotifications.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+                {
+                    Utills_G.startGoogleMaps(getActivity(), listData.get(i).getLatLng());
+                }
+            });
+        }
+
+
         Calendar c = Calendar.getInstance();
         Date date = c.getTime();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 
-        getData("2000-01-01", sdf.format(date), getVehicleID(), "en");
+        getData("2000-01-01", sdf.format(date), getVehicleID(), selectedLanguage());
 
 
         return v;
@@ -104,7 +120,11 @@ public class Notification extends BaseFragmentHome
                 try
                 {
 
-                    listData = new ArrayList<>();
+                    if (listData == null)
+                    {
+                        listData = new ArrayList<>();
+                    }
+                    listData.clear();
 
 
                     JSONObject jObj = new JSONObject(output);

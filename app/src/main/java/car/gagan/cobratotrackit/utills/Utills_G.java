@@ -8,8 +8,12 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -21,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import car.gagan.cobratotrackit.Classes.Fragments.Home;
+import car.gagan.cobratotrackit.Classes.Splash_Cobra;
 import car.gagan.cobratotrackit.R;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -114,6 +120,116 @@ public class Utills_G
                 }
             });
         }
+
+
+    }
+
+    static Locale myLocale;
+
+    public static void change_language(String lang, Context con)
+    {
+        myLocale = new Locale(lang);
+        Resources res = con.getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+    }
+
+
+    public static void show_dialog_languageSelection(final Context con)
+    {
+        global_dialog = new Dialog(con, R.style.Theme_Dialog);
+        global_dialog.setContentView(R.layout.dialog_global);
+        global_dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        TextView tex = (TextView) global_dialog.findViewById(R.id.text);
+        Button ok = (Button) global_dialog.findViewById(R.id.ok);
+        Button cancel = (Button) global_dialog.findViewById(R.id.cancel);
+
+
+        tex.setText("Please select an language..");
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(global_dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+        global_dialog.show();
+        global_dialog.getWindow().setAttributes(lp);
+
+
+        cancel.setVisibility(View.VISIBLE);
+        cancel.setText(R.string.hebrew);
+        ok.setText(R.string.english);
+        // ok.setOnClickListener(oc);
+        cancel.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v)
+            {
+                global_dialog.dismiss();
+                SharedPreferences preference = con.getSharedPreferences("Preference", Context.MODE_PRIVATE);
+
+                if (!preference.getString("language", "").equals("he"))
+                {
+
+                    Utills_G.showToast(con.getString(R.string.translating_to) + " Hebrew", con, true);
+
+
+                    preference.edit().putString("language", "he").apply();
+
+                    change_language("he", con);
+
+
+//                    Intent i = ((Activity) con).getBaseContext().getPackageManager()
+//                            .getLaunchIntentForPackage(((Activity) con).getBaseContext().getPackageName());
+//                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    con.startActivity(i);
+//                    ((Activity) con).finish();
+
+                    ((Activity) con).recreate();
+//                    Intent i1 = new Intent(con, Splash_Cobra.class);
+//                    i1.setAction(Intent.ACTION_MAIN);
+//                    i1.addCategory(Intent.CATEGORY_HOME);
+//                    i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    con.startActivity(i1);
+//                    ((Activity) con).finish();
+                    Home.reStartFragments();
+                    Global_Constants.LANGUAGE_CHANGED = true;
+                }
+            }
+        });
+        ok.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v)
+            {
+                global_dialog.dismiss();
+                SharedPreferences preference = con.getSharedPreferences("Preference", Context.MODE_PRIVATE);
+
+                if (!preference.getString("language", "").equals("en"))
+                {
+                    Utills_G.showToast("Translating to " + " English", con, true);
+
+                    preference.edit().putString("language", "en").apply();
+
+                    change_language("en", con);
+
+                    ((Activity) con).recreate();
+
+                    Home.reStartFragments();
+                    Global_Constants.LANGUAGE_CHANGED = true;
+
+                }
+
+            }
+        });
 
 
     }

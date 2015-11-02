@@ -23,8 +23,11 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import car.gagan.cobratotrackit.model.VehicleInfo;
 import car.gagan.cobratotrackit.utills.CallBackWebService;
 import car.gagan.cobratotrackit.utills.Global_Constants;
+import car.gagan.cobratotrackit.utills.ImageDownloader;
+import car.gagan.cobratotrackit.utills.StoreData;
 import car.gagan.cobratotrackit.utills.Utills_G;
 import car.gagan.cobratotrackit.webservice.SuperWebServiceG;
 
@@ -251,10 +254,104 @@ public class Register_Screen extends AppCompatActivity implements View.OnClickLi
                 edit.putString(Global_Constants.DEVICEIMEI, jobjinner.optString("DeviceIMEI"));
 
                 edit.apply();
-                Intent intnt = new Intent(Register_Screen.this, Verfication_Screen.class);
-                intnt.putExtra(Verfication_Screen.ISMOBILE_VERIFICATION, true);
-                startActivity(intnt);
-                finish();
+
+
+                SharedPreferences preference = getSharedPreferences("Preference", Context.MODE_PRIVATE);
+
+                preference.edit().putString("language", "en").commit();
+
+
+                final Dialog dialog = new Dialog(Register_Screen.this, R.style.Theme_Dialog);
+                dialog.setContentView(R.layout.progress_dialog);
+                dialog.show();
+
+                new SuperWebServiceG(String.format("%sGateway/GetVehicleInfo?VehicleId=%s", Global_Constants.URL, jobjinner.optString("VehicleId")), new HashMap<String, String>(), new CallBackWebService()
+                {
+                    @Override
+                    public void webOnFinish(String output)
+                    {
+
+                        try
+                        {
+
+
+                            JSONObject jObj = new JSONObject(output);
+
+                            if (jObj.getString(Global_Constants.Status).equals(Global_Constants.success))
+                            {
+
+                                JSONObject jobjinner = new JSONObject(jObj.getString(Global_Constants.Message));
+
+                                StoreData.write(Register_Screen.this, new VehicleInfo(jobjinner.optString("ModelName"), jobjinner.optString("ManufactorName"), jobjinner.optString("LastUpdatedOn"), jobjinner.optString("VehicleImageURL"), jobjinner.optString("LicensePlate")));
+
+
+                                new ImageDownloader(jobjinner.optString("VehicleImageURL"), new CallBackWebService()
+                                {
+                                    @Override
+                                    public void webOnFinish(String output)
+                                    {
+
+
+                                        if (dialog.isShowing())
+                                        {
+                                            dialog.dismiss();
+                                        }
+                                        Intent intnt = new Intent(Register_Screen.this, Verfication_Screen.class);
+                                        intnt.putExtra(Verfication_Screen.ISMOBILE_VERIFICATION, true);
+                                        startActivity(intnt);
+                                        finish();
+
+                                    }
+                                }, Register_Screen.this).execute();
+
+
+                            }
+                            else
+                            {
+
+                                if (dialog.isShowing())
+                                {
+                                    dialog.dismiss();
+                                }
+
+                            }
+
+
+                        }
+                        catch (Exception | Error e)
+                        {
+                            if (dialog.isShowing())
+                            {
+                                dialog.dismiss();
+                            }
+
+
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }).execute();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             }

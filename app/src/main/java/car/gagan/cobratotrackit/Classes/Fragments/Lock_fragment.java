@@ -43,23 +43,24 @@ public class Lock_fragment extends BaseFragmentHome implements View.OnClickListe
         // Required empty public constructor
     }
 
-    private static View v = null;
+    public static View vLock = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        if (v == null)
-            v = inflater.inflate(R.layout.fragment_lock, container, false);
+        if (vLock == null)
+            vLock = inflater.inflate(R.layout.fragment_lock, container, false);
 
-        btnDisArm = (Button) v.findViewById(R.id.btnDisArm);
-        btnLock = (Button) v.findViewById(R.id.btnLock);
-        btnUnLock = (Button) v.findViewById(R.id.btnUnLock);
+        btnDisArm = (Button) vLock.findViewById(R.id.btnDisArm);
+        btnLock = (Button) vLock.findViewById(R.id.btnLock);
+        btnUnLock = (Button) vLock.findViewById(R.id.btnUnLock);
         btnLock.setOnClickListener(this);
         btnUnLock.setOnClickListener(this);
         btnDisArm.setOnClickListener(this);
 
-        return v;
+        attachFragmentVehicleInfo();
+        return vLock;
 
     }
 
@@ -174,8 +175,23 @@ public class Lock_fragment extends BaseFragmentHome implements View.OnClickListe
 
     }
 
+    @Override
+    public void onResume()
+    {
 
-//    --For Door Lock
+
+        if (Global_Constants.LANGUAGE_CHANGED)
+        {
+
+            Global_Constants.LANGUAGE_CHANGED = false;
+        }
+
+
+        super.onResume();
+    }
+
+
+    //    --For Door Lock
 //    URL : http://112.196.34.42:8091/Gateway/SendLockDoorsMessage?UnitID=0355255040459043
 //    Method : GET
 //        OUTPUT

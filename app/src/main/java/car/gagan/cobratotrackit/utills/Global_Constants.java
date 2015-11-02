@@ -40,9 +40,11 @@ public class Global_Constants
     public final static String UnblinkLights = "SendUnblinkingLightsMessageAsync";
 
 
-    public final static String SERVERTIME_FORMAT = "dd-mm-yyyy HH:MM:ss";
+    public final static String SERVERTIME_FORMAT = "dd-MM-yyyy HH:mm:ss";
 
-    public final static String TIMEFORMAT_HISTORY = "EEE dd MMMM yyyy,hh:MM a";
-    public final static String TIMEFORMAT_NOTIFICATION = "dd-mm-yyyy | HH:MM";
+    public final static String TIMEFORMAT_HISTORY = "EEE dd MMMM yyyy,hh:mm a";
+    public final static String TIMEFORMAT_NOTIFICATION = "dd-MM-yyyy | HH:mm";
 
+
+    public static boolean LANGUAGE_CHANGED = false;
 }

@@ -1,7 +1,9 @@
 package car.gagan.cobratotrackit.Classes.Fragments;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,26 +42,33 @@ public class Lights_fragment extends BaseFragmentHome implements View.OnClickLis
         // Required empty public constructor
     }
 
-    private static View v = null;
+    public static View vLights = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        if (v == null)
-            v = inflater.inflate(R.layout.fragment_light, container, false);
+        if (vLights == null)
+            vLights = inflater.inflate(R.layout.fragment_light, container, false);
 
 
-        btnLightsOn = (Button) v.findViewById(R.id.btnLightsOn);
-        btnLightsOff = (Button) v.findViewById(R.id.btnLightsOff);
+        btnLightsOn = (Button) vLights.findViewById(R.id.btnLightsOn);
+        btnLightsOff = (Button) vLights.findViewById(R.id.btnLightsOff);
         btnLightsOn.setOnClickListener(this);
         btnLightsOff.setOnClickListener(this);
 
+        attachFragmentVehicleInfo();
 
-        return v;
+        return vLights;
 
     }
 
+
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public void onClick(View view)
@@ -96,7 +105,6 @@ public class Lights_fragment extends BaseFragmentHome implements View.OnClickLis
                         {
                             e.printStackTrace();
                         }
-
 
 
                     }

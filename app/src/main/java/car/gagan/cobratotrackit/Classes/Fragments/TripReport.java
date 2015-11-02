@@ -24,10 +24,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
+import car.gagan.cobratotrackit.model.EventsModel;
 import car.gagan.cobratotrackit.model.TripHistoryModel;
 import car.gagan.cobratotrackit.utills.BaseFragmentHome;
 import car.gagan.cobratotrackit.utills.CallBackWebService;
@@ -43,8 +46,11 @@ public class TripReport extends BaseFragmentHome
 
     //    private Dialog dialog;
     private final int[] theme3 = {R.color.grey, R.color.red, R.color.black};
-    private static LinearLayout LayoutNoti;
+    private LinearLayout LayoutNoti;
     SharedPreferences shrdPref;
+
+
+    private static List<TripHistoryModel> listData;
 
     public TripReport()
     {
@@ -71,6 +77,16 @@ public class TripReport extends BaseFragmentHome
         shrdPref = getActivity().getSharedPreferences(Global_Constants.shared_pref_name, Context.MODE_PRIVATE);
 
         LayoutNoti = (LinearLayout) v.findViewById(R.id.LayoutNoti);
+
+
+        if (listData != null && listData.size() > 0)
+        {
+            for (TripHistoryModel data : listData)
+            {
+                ShowTripReportList(LayoutNoti, data, 1);
+            }
+
+        }
 
 
         Calendar c = Calendar.getInstance();
@@ -108,6 +124,12 @@ public class TripReport extends BaseFragmentHome
 //                        dialog.dismiss();
 //                    }
 
+                    if (listData == null)
+                    {
+                        listData = new ArrayList<TripHistoryModel>();
+                    }
+                    listData.clear();
+                    LayoutNoti.removeAllViews();
 
                     JSONObject jObj = new JSONObject(output);
 
@@ -153,6 +175,7 @@ public class TripReport extends BaseFragmentHome
                                 e.printStackTrace();
                             }
 
+                            listData.add(data);
 
                             ShowTripReportList(LayoutNoti, data, i);
 
