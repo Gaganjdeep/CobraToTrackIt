@@ -65,9 +65,7 @@ public class TripReport extends BaseFragmentHome
     }
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState
-    )
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
 
         View v = inflater.inflate(R.layout.fragment_trip_report, container, false);
@@ -95,7 +93,7 @@ public class TripReport extends BaseFragmentHome
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 
-        gethistory("2000-01-01", sdf.format(date), getVehicleID());
+        gethistory("2000-01-01", sdf.format(date), getVehicleID(), selectedLanguage());
 
         return v;
     }
@@ -108,9 +106,9 @@ public class TripReport extends BaseFragmentHome
 
     }
 
-    private void gethistory(String startDate, String endDate, String vehicleID)
+    private void gethistory(String startDate, String endDate, String vehicleID, String language)
     {
-        new SuperWebServiceG(urlToTripHistory(startDate, endDate, vehicleID), new HashMap<String, String>(), new CallBackWebService()
+        new SuperWebServiceG(urlToTripHistory(startDate, endDate, vehicleID, language), new HashMap<String, String>(), new CallBackWebService()
         {
             @Override
             public void webOnFinish(String output)
@@ -126,7 +124,7 @@ public class TripReport extends BaseFragmentHome
 
                     if (listData == null)
                     {
-                        listData = new ArrayList<TripHistoryModel>();
+                        listData = new ArrayList<>();
                     }
                     listData.clear();
                     LayoutNoti.removeAllViews();
@@ -155,16 +153,13 @@ public class TripReport extends BaseFragmentHome
                             data.setTopSpeed(jobjInner.optString("TopSpeed"));
                             data.setTripDuration(jobjInner.optString("TripDuration"));
 
-
                             try
                             {
                                 LatLng latlng = new LatLng(Double.parseDouble(jobjInner.optString("LatitudeTo")), Double.parseDouble(jobjInner.optString("LongitudeTo")));
 
-
                                 data.setLatLngTo(latlng);
 
                                 LatLng latlngFrom = new LatLng(Double.parseDouble(jobjInner.optString("LatitudeFrom")), Double.parseDouble(jobjInner.optString("LongitudeFrom")));
-
 
                                 data.setLatlngFrom(latlngFrom);
 
@@ -200,16 +195,11 @@ public class TripReport extends BaseFragmentHome
 
     private void ShowTripReportList(LinearLayout layoutContainer, final TripHistoryModel data, int position)
     {
-
-
         final LinearLayout layoutMsgContainer = new LinearLayout(getActivity());
-
 
         View viewOther = LayoutInflater.from(getActivity()).inflate(R.layout.inflator_trip_report, layoutMsgContainer);
 
-
         CardView layoutbackgroudTripReport = (CardView) viewOther.findViewById(R.id.cardV);
-
 
         TextView txtv_speed_Report = (TextView) viewOther.findViewById(R.id.txtv_speed_Report);
         TextView txtv_Topspeed_Report = (TextView) viewOther.findViewById(R.id.txtv_Topspeed_Report);
@@ -220,28 +210,22 @@ public class TripReport extends BaseFragmentHome
         TextView txtv_StartAddress = (TextView) viewOther.findViewById(R.id.txtv_StartAddress);
         TextView txtv_EndAddress = (TextView) viewOther.findViewById(R.id.txtv_EndAddress);
 
-
         changeColor(layoutbackgroudTripReport, txtv_speed_Report, txtv_Topspeed_Report, position);
-
 
         txtv_speed_Report.setText(data.getAverageSpeed());
         txtv_Topspeed_Report.setText(data.getTopSpeed());
 
-
         String km = data.getKilometer().contains(".") ? (data.getKilometer().substring(0, data.getKilometer().indexOf("."))) : data.getKilometer();
 
         txtv_km_Report.setText(Html.fromHtml(km + "<small><font color=black> km</font></small>"));
-
-
         txtv_time_Report.setText(Html.fromHtml(data.getTripDuration() + "<small><font color=black> min</font></small>"));
 
         txtv_date_Report.setText(Utills_G.format_date(data.getEndTime(), Global_Constants.SERVERTIME_FORMAT, Global_Constants.TIMEFORMAT_HISTORY));
 
-        txtv_StartAddress.setText(data.getAddressFrom().isEmpty() ? "" : String.format("START : %s", data.getAddressFrom()));
-        txtv_EndAddress.setText(data.getAddressTo().isEmpty() ? "" : String.format("END : %s", data.getAddressTo()));
+        txtv_StartAddress.setText(data.getAddressFrom().isEmpty() ? "" : String.format("%s : %s", getResources().getString(R.string.start), data.getAddressFrom()));
+        txtv_EndAddress.setText(data.getAddressTo().isEmpty() ? "" : String.format("%s : %s", getResources().getString(R.string.end), data.getAddressTo()));
 
         layoutContainer.addView(layoutMsgContainer);
-
 
         layoutContainer.setOnClickListener(new View.OnClickListener()
         {
@@ -251,8 +235,6 @@ public class TripReport extends BaseFragmentHome
                 startGoogleMaps(data.getLatLngTo(), data.getLatlngFrom());
             }
         });
-
-
     }
 
     private void changeColor(CardView layout, TextView tvAvgSpeed, TextView tvTopSpeed, int position)
@@ -285,9 +267,9 @@ public class TripReport extends BaseFragmentHome
 
     }
 
-    private String urlToTripHistory(String startDate, String endDate, String vehicleID)
+    private String urlToTripHistory(String startDate, String endDate, String vehicleID, String lanuage)
     {
-        return Global_Constants.URL + "Customer/GetTripHistory?StartDate=" + startDate + "&EndDate=" + endDate + "&VehicleId=" + vehicleID;
+        return Global_Constants.URL + "Customer/GetTripHistory?StartDate=" + startDate + "&EndDate=" + endDate + "&VehicleId=" + vehicleID + "&Language=" + lanuage;
     }
 
     private void startGoogleMaps(LatLng ltlngDestination, LatLng ltlngSource)

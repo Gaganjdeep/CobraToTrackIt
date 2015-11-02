@@ -200,7 +200,7 @@ public class Utills_G
 //                    con.startActivity(i1);
 //                    ((Activity) con).finish();
                     Home.reStartFragments();
-                    Global_Constants.LANGUAGE_CHANGED = true;
+
                 }
             }
         });
@@ -215,7 +215,7 @@ public class Utills_G
 
                 if (!preference.getString("language", "").equals("en"))
                 {
-                    Utills_G.showToast("Translating to " + " English", con, true);
+                    Utills_G.showToast(con.getString(R.string.translating_to) + " English", con, true);
 
                     preference.edit().putString("language", "en").apply();
 
@@ -224,7 +224,6 @@ public class Utills_G
                     ((Activity) con).recreate();
 
                     Home.reStartFragments();
-                    Global_Constants.LANGUAGE_CHANGED = true;
 
                 }
 

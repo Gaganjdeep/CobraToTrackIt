@@ -180,12 +180,6 @@ public class Lock_fragment extends BaseFragmentHome implements View.OnClickListe
     {
 
 
-        if (Global_Constants.LANGUAGE_CHANGED)
-        {
-
-            Global_Constants.LANGUAGE_CHANGED = false;
-        }
-
 
         super.onResume();
     }

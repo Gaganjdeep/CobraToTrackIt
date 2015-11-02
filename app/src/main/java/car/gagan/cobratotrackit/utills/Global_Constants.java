@@ -46,5 +46,4 @@ public class Global_Constants
     public final static String TIMEFORMAT_NOTIFICATION = "dd-MM-yyyy | HH:mm";
 
 
-    public static boolean LANGUAGE_CHANGED = false;
 }

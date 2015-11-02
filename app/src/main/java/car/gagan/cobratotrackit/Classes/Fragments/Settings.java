@@ -69,7 +69,7 @@ public class Settings extends android.support.v4.app.Fragment implements View.On
 
             case R.id.layoutLogout:
 
-                Utills_G.show_dialog_msg(getActivity(), "Do you want to log out.", new View.OnClickListener()
+                Utills_G.show_dialog_msg(getActivity(), getResources().getString(R.string.do_u_want_to_logout), new View.OnClickListener()
                 {
                     @Override
                     public void onClick(View view)
