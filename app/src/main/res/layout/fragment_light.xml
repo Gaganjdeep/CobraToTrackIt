@@ -6,14 +6,11 @@
               android:background="@color/background"
               android:orientation="vertical">
 
-
-    <fragment
-        android:id="@+id/layoutvehicleInfoLight"
-        android:name="car.gagan.cobratotrackit.Classes.Fragments.VehicleInfofragment"
+    <FrameLayout
+        android:id="@+id/layoutvehicleInfo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        tools:layout="@layout/fragment_vehicle_infofragment"/>
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Lights"
+            android:text="@string/lights_on"
             android:textColor="@color/white"
             android:id="@+id/btnLightsOn"
             android:drawableLeft="@mipmap/light_icon"
@@ -47,7 +44,7 @@
             android:id="@+id/btnLightsOff"
             android:drawableLeft="@mipmap/ic_light_off"
             android:paddingLeft="10dp"
-            android:text="Lights Off"
+            android:text="@string/lights_off"
             android:background="@drawable/right_round_white_stroke_selector"/>
 
     </LinearLayout>

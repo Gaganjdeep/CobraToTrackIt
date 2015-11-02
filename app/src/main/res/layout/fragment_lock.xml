@@ -12,12 +12,10 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <fragment
+        <FrameLayout
             android:id="@+id/layoutvehicleInfo"
-            android:name="car.gagan.cobratotrackit.Classes.Fragments.VehicleInfofragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_vehicle_infofragment"/>
+            android:layout_height="match_parent"/>
 
         <LinearLayout
             android:layout_width="match_parent"

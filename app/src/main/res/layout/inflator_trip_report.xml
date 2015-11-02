@@ -141,7 +141,7 @@
                             android:layout_gravity="center"
                             android:paddingLeft="7dp"
                             android:singleLine="true"
-                            android:text="Average Speed"
+                            android:text="@string/average_speed"
                             android:textColor="@color/white"
                             />
 
@@ -166,7 +166,7 @@
                         android:layout_gravity="center"
                         android:paddingLeft="7dp"
                         android:singleLine="true"
-                        android:text="Top Speed       "
+                        android:text="@string/top_speed"
                         android:textColor="@color/white"
                         />
 

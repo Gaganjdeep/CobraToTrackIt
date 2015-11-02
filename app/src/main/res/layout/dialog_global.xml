@@ -26,8 +26,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:autoLink="all"
+                android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="17sp"
                 />
 
         </LinearLayout>
@@ -49,7 +50,7 @@
             android:layout_weight="1"
             android:background="@drawable/btn_selector"
             android:padding="10dp"
-            android:text="OK"
+            android:text="@string/ok"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold"/>
@@ -63,7 +64,7 @@
             android:layout_weight="1"
             android:background="@drawable/btn_selector"
             android:padding="10dp"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold"

@@ -37,7 +37,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lights"
+            android:text="@string/lights"
             android:textColor="@color/white"/>
 
     </LinearLayout>
@@ -69,7 +69,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lock"
+            android:text="@string/lock"
             android:textColor="@color/white"/>
 
 
@@ -99,7 +99,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Engine"
+            android:text="@string/engine"
             android:textColor="@color/white"/>
 
     </LinearLayout>
@@ -127,7 +127,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tracking"
+            android:text="@string/tracking"
             android:textColor="@color/white"/>
     </LinearLayout>
 

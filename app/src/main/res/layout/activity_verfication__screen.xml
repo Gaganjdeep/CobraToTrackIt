@@ -106,7 +106,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="Please enter four digit code."
+                    android:text="@string/please_enter_code"
                     android:textColor="@color/white"/>
             </LinearLayout>
 

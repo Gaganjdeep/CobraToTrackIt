@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@null"
-            android:text="Location"/>
+            android:text="@string/location"/>
 
 
     </android.support.v7.widget.Toolbar>
@@ -75,9 +75,9 @@
                     android:id="@+id/txtv_addressLocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="80dp"
                     android:background="@null"
-                    android:text="address"
+                    android:gravity="center"
+                    android:text="@string/address"
                     android:textColor="@color/white"/>
 
 
@@ -89,10 +89,13 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/odometer_drawable"
                     android:gravity="center_horizontal"
-                    android:padding="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="5dp"
                     android:text="127"
-                    android:textColor="@color/white"
-                    android:textSize="37sp"/>
+                    android:textColor="@color/red"
+                    android:textSize="27sp"/>
 
 
             </LinearLayout>
@@ -118,7 +121,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Engine Status"
+                        android:text="@string/engine_status"
                         android:textColor="@color/white"/>
 
 
@@ -144,7 +147,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Battery Status"
+                        android:text="@string/battery_status"
                         android:textColor="@color/white"/>
 
                     <android.support.design.widget.FloatingActionButton
@@ -175,12 +178,13 @@
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:layout_weight="1"
+                    android:gravity="left"
                     android:background="@null"
-                    android:text="Show Route"
+                    android:text="@string/show_route"
                     android:textColor="@color/white"/>
 
 

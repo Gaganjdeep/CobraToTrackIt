@@ -7,13 +7,11 @@
               android:orientation="vertical">
 
 
-    <fragment
+    <FrameLayout
         android:id="@+id/layoutvehicleInfo"
-        android:name="car.gagan.cobratotrackit.Classes.Fragments.VehicleInfofragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        tools:layout="@layout/fragment_vehicle_infofragment"/>
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +28,7 @@
             android:background="@drawable/left_round_white_stroke_selector"
             android:drawableLeft="@mipmap/ic_engine_on"
             android:paddingLeft="10dp"
-            android:text="Start Engine"
+            android:text="@string/start_engine"
             android:textColor="@color/white"/>
 
         <View
@@ -47,7 +45,7 @@
             android:background="@drawable/right_round_white_stroke_selector"
             android:drawableLeft="@mipmap/ic_engineoff"
             android:paddingLeft="10dp"
-            android:text="Stop Engine"
+            android:text="@string/stop_engine"
             android:textColor="@color/white"/>
 
     </LinearLayout>
