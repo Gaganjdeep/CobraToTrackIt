@@ -140,15 +140,15 @@ public class Utills_G
     public static void show_dialog_languageSelection(final Context con)
     {
         global_dialog = new Dialog(con, R.style.Theme_Dialog);
-        global_dialog.setContentView(R.layout.dialog_global);
+        global_dialog.setContentView(R.layout.lanuage_dialog);
         global_dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         TextView tex = (TextView) global_dialog.findViewById(R.id.text);
-        Button ok = (Button) global_dialog.findViewById(R.id.ok);
-        Button cancel = (Button) global_dialog.findViewById(R.id.cancel);
+        Button btnEnglish = (Button) global_dialog.findViewById(R.id.btnEnglish);
+        Button btnHebrew = (Button) global_dialog.findViewById(R.id.btnHebrew);
+        Button btnRussian = (Button) global_dialog.findViewById(R.id.btnRussian);
 
-
-        tex.setText("Please select an language..");
+        tex.setText(R.string.please_select_language);
 
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -159,12 +159,33 @@ public class Utills_G
         global_dialog.show();
         global_dialog.getWindow().setAttributes(lp);
 
+        btnRussian.setOnClickListener(new View.OnClickListener()
+        {
 
-        cancel.setVisibility(View.VISIBLE);
-        cancel.setText(R.string.hebrew);
-        ok.setText(R.string.english);
-        // ok.setOnClickListener(oc);
-        cancel.setOnClickListener(new View.OnClickListener()
+            @Override
+            public void onClick(View v)
+            {
+                global_dialog.dismiss();
+                SharedPreferences preference = con.getSharedPreferences("Preference", Context.MODE_PRIVATE);
+
+                if (!preference.getString("language", "").equals("ru"))
+                {
+
+                    Utills_G.showToast(con.getString(R.string.translating_to) + " Russian", con, true);
+
+
+                    preference.edit().putString("language", "ru").apply();
+
+                    change_language("ru", con);
+
+
+                    ((Activity) con).recreate();
+                    Home.reStartFragments();
+
+                }
+            }
+        });
+        btnHebrew.setOnClickListener(new View.OnClickListener()
         {
 
             @Override
@@ -184,27 +205,13 @@ public class Utills_G
                     change_language("he", con);
 
 
-//                    Intent i = ((Activity) con).getBaseContext().getPackageManager()
-//                            .getLaunchIntentForPackage(((Activity) con).getBaseContext().getPackageName());
-//                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    con.startActivity(i);
-//                    ((Activity) con).finish();
-
                     ((Activity) con).recreate();
-//                    Intent i1 = new Intent(con, Splash_Cobra.class);
-//                    i1.setAction(Intent.ACTION_MAIN);
-//                    i1.addCategory(Intent.CATEGORY_HOME);
-//                    i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                    i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                    con.startActivity(i1);
-//                    ((Activity) con).finish();
                     Home.reStartFragments();
 
                 }
             }
         });
-        ok.setOnClickListener(new View.OnClickListener()
+        btnEnglish.setOnClickListener(new View.OnClickListener()
         {
 
             @Override

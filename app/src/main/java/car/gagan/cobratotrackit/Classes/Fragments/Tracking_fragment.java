@@ -78,7 +78,7 @@ public class Tracking_fragment extends BaseFragmentHome implements View.OnClickL
         switch (view.getId())
         {
             case R.id.btnStartTracking:
-
+                SuperWebServiceG.cancelPrevious();
                 new SuperWebServiceG(START_TRACKING_URL + getUnitID(), new HashMap<String, String>(), new CallBackWebService()
                 {
                     @Override
@@ -111,7 +111,7 @@ public class Tracking_fragment extends BaseFragmentHome implements View.OnClickL
                 break;
 
             case R.id.btnStoptracking:
-
+                SuperWebServiceG.cancelPrevious();
                 new SuperWebServiceG(STOP_TRACKING_URL + getUnitID(), new HashMap<String, String>(), new CallBackWebService()
                 {
                     @Override

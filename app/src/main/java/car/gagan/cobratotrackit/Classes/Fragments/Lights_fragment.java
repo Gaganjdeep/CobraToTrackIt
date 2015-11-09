@@ -1,22 +1,17 @@
 package car.gagan.cobratotrackit.Classes.Fragments;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-
 import org.json.JSONObject;
-
-import car.gagan.cobratotrackit.R;
 
 import java.util.HashMap;
 
+import car.gagan.cobratotrackit.R;
 import car.gagan.cobratotrackit.utills.BaseFragmentHome;
 import car.gagan.cobratotrackit.utills.CallBackWebService;
 import car.gagan.cobratotrackit.utills.Global_Constants;
@@ -83,6 +78,10 @@ public class Lights_fragment extends BaseFragmentHome implements View.OnClickLis
         {
             case R.id.btnLightsOn:
 
+
+                SuperWebServiceG.cancelPrevious();
+
+
                 new SuperWebServiceG(LIGHTS_ON_URL + getUnitID(), new HashMap<String, String>(), new CallBackWebService()
                 {
                     @Override
@@ -97,7 +96,7 @@ public class Lights_fragment extends BaseFragmentHome implements View.OnClickLis
                         {
                             JSONObject jObj = new JSONObject(output);
 
-                            new Utills_G().show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
+                            Utills_G.show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
 
 
                         }
@@ -114,6 +113,7 @@ public class Lights_fragment extends BaseFragmentHome implements View.OnClickLis
 
             case R.id.btnLightsOff:
 
+                SuperWebServiceG.cancelPrevious();
                 new SuperWebServiceG(LIGHTS_OFF_URL + getUnitID(), new HashMap<String, String>(), new CallBackWebService()
                 {
                     @Override
@@ -128,7 +128,7 @@ public class Lights_fragment extends BaseFragmentHome implements View.OnClickLis
                         {
                             JSONObject jObj = new JSONObject(output);
 
-                            new Utills_G().show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
+                            Utills_G.show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
 
 
                         }

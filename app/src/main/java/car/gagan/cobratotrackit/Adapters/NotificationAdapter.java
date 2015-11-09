@@ -68,9 +68,12 @@ public class NotificationAdapter extends BaseAdapter
 
 
         txtv_title.setText(data.getEventName());
+
+
+        txtv_speed.setText(data.getAddress());
+
+
         txtv_date_time.setText(Utills_G.format_date(data.getMessageTime(), Global_Constants.SERVERTIME_FORMAT, Global_Constants.TIMEFORMAT_NOTIFICATION));
-        txtv_speed.setText(data.getAddress()
-        );
 
 
 //        View v = new View(con);

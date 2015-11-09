@@ -138,7 +138,7 @@ public class Verfication_Screen extends AppCompatActivity
 
                 SharedPreferences shrdPref = getSharedPreferences(Global_Constants.shared_pref_name, Context.MODE_PRIVATE);
 
-                String url_ = Global_Constants.URL + "Customer/ValidateImmobilizerCode?LicensePlate=" + shrdPref.getString("LicensePlate", "") + "&Code=" + txt1.getText().toString() + txt2.getText().toString() + txt3.getText().toString() + txt4.getText().toString();
+                String url_ = Global_Constants.URL + "Customer/ValidateImmobilizerCode?UnitId=" + shrdPref.getString(Global_Constants.DEVICEIMEI, "") + "&Code=" + txt1.getText().toString() + txt2.getText().toString() + txt3.getText().toString() + txt4.getText().toString();
 
 
                 fetchData(url_, new HashMap<String, String>());

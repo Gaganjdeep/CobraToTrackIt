@@ -1,6 +1,8 @@
 package car.gagan.cobratotrackit.Classes.Fragments;
 
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -25,12 +28,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import car.gagan.cobratotrackit.Adapters.NotificationAdapter;
+import car.gagan.cobratotrackit.Adapters.TripReportAdapter;
 import car.gagan.cobratotrackit.Classes.MainActivity;
 import car.gagan.cobratotrackit.R;
 import car.gagan.cobratotrackit.model.EventsModel;
 import car.gagan.cobratotrackit.model.TripHistoryModel;
 import car.gagan.cobratotrackit.utills.BaseFragmentHome;
 import car.gagan.cobratotrackit.utills.CallBackWebService;
+import car.gagan.cobratotrackit.utills.DateUtilsG;
 import car.gagan.cobratotrackit.utills.Global_Constants;
 import car.gagan.cobratotrackit.utills.Utills_G;
 import car.gagan.cobratotrackit.webservice.SuperWebServiceG;
@@ -42,7 +47,9 @@ public class Notification extends BaseFragmentHome
     private ListView listVnotifications;
 
     private static List<EventsModel> listData;
-
+    NotificationAdapter adapter;
+    private static int daysBack = 4;
+    ProgressBar progressBarNotification;
 
     public Notification()
     {
@@ -67,11 +74,18 @@ public class Notification extends BaseFragmentHome
         setupToolbar(v);
 
         listVnotifications = (ListView) v.findViewById(R.id.listVnotifications);
+        progressBarNotification = (ProgressBar) v.findViewById(R.id.progressBarTripReport);
+        progressBarNotification.getIndeterminateDrawable().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+        progressBarNotification.setVisibility(View.VISIBLE);
 
 
         if (listData != null && listData.size() > 0)
         {
-            listVnotifications.setAdapter(new NotificationAdapter(getActivity(), listData));
+
+            progressBarNotification.setVisibility(View.GONE);
+
+            adapter = new NotificationAdapter(getActivity(), listData);
+            listVnotifications.setAdapter(adapter);
             listVnotifications.setOnItemClickListener(new AdapterView.OnItemClickListener()
             {
                 @Override
@@ -80,16 +94,12 @@ public class Notification extends BaseFragmentHome
                     Utills_G.startGoogleMaps(getActivity(), listData.get(i).getLatLng());
                 }
             });
+
+
         }
 
 
-        Calendar c = Calendar.getInstance();
-        Date date = c.getTime();
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-
-        getData("2000-01-01", sdf.format(date), getVehicleID(), selectedLanguage());
+        getData(DateUtilsG.getStartDate(daysBack), DateUtilsG.getCurrentDate(), getVehicleID(), selectedLanguage());
 
 
         return v;
@@ -164,23 +174,34 @@ public class Notification extends BaseFragmentHome
 
                         }
 
-                        listVnotifications.setAdapter(new NotificationAdapter(getActivity(), listData));
-                        listVnotifications.setOnItemClickListener(new AdapterView.OnItemClickListener()
+
+                        if (adapter == null)
                         {
-                            @Override
-                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+                            adapter = new NotificationAdapter(getActivity(), listData);
+                            listVnotifications.setAdapter(adapter);
+                            listVnotifications.setOnItemClickListener(new AdapterView.OnItemClickListener()
                             {
-                                Utills_G.startGoogleMaps(getActivity(), listData.get(i).getLatLng());
-                            }
-                        });
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+                                {
+                                    Utills_G.startGoogleMaps(getActivity(), listData.get(i).getLatLng());
+                                }
+                            });
+//                        listVTripReport.setListener(TripReport.this);
+                        }
+                        else
+                        {
+                            adapter.notifyDataSetChanged();
+                        }
 
 
                     }
 
-
+                    progressBarNotification.setVisibility(View.GONE);
                 }
                 catch (Exception e)
                 {
+                    progressBarNotification.setVisibility(View.GONE);
                     e.printStackTrace();
                 }
 

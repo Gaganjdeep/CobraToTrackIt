@@ -10,7 +10,16 @@ public class Global_Constants
     public final static String Status = "Status";
     public final static String Message = "Message";
     public final static String success = "success";
-    public final static String URL = "http://112.196.34.42:8091/";
+
+
+//    public final static String URL = "http://112.196.34.42:8091/";
+
+
+    public final static String URL = "http://212.179.114.28:570/";
+
+//    http://212.179.114.28:570/Gateway/SendGetPositionMessage?UnitID=0355255042579525
+
+
 
 
 //	edit.putString("FirstName", edFirstName.getText().toString());
@@ -40,7 +49,8 @@ public class Global_Constants
     public final static String UnblinkLights = "SendUnblinkingLightsMessageAsync";
 
 
-    public final static String SERVERTIME_FORMAT = "dd-MM-yyyy HH:mm:ss";
+    //                                                     9/24/2015 2:27:11 AM
+    public final static String SERVERTIME_FORMAT = "MM/dd/yyyy HH:mm:ss a";
 
     public final static String TIMEFORMAT_HISTORY = "EEE dd MMMM yyyy,hh:mm a";
     public final static String TIMEFORMAT_NOTIFICATION = "dd-MM-yyyy | HH:mm";

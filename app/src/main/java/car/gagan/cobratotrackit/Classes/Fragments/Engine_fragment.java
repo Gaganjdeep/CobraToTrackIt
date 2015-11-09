@@ -71,7 +71,7 @@ public class Engine_fragment extends BaseFragmentHome implements View.OnClickLis
         switch (view.getId())
         {
             case R.id.btnEngineOn:
-
+                SuperWebServiceG.cancelPrevious();
                 new SuperWebServiceG(ENGINE_START_URL + getUnitID(), new HashMap<String, String>(), new CallBackWebService()
                 {
                     @Override
@@ -102,7 +102,7 @@ public class Engine_fragment extends BaseFragmentHome implements View.OnClickLis
                 break;
 
             case R.id.btnENgineOff:
-
+                SuperWebServiceG.cancelPrevious();
                 new SuperWebServiceG(ENGINE_STOP_URL + getUnitID(), new HashMap<String, String>(), new CallBackWebService()
                 {
                     @Override

@@ -18,12 +18,28 @@ public class SuperWebServiceG extends AsyncTask<Void, String, String>
     private CallBackWebService callBack;
 
 
+    public static SuperWebServiceG asyncClass;
+
+
     public SuperWebServiceG(String URL_, HashMap<String, String> hashMapData, CallBackWebService callBack)
     {
         this.URL_ = URL_;
         this.hashMapData = hashMapData;
         this.callBack = callBack;
+
+
+        asyncClass = this;
     }
+
+
+    public static void cancelPrevious()
+    {
+        if (asyncClass != null)
+        {
+            asyncClass.cancel(true);
+        }
+    }
+
 
     @Override
     protected String doInBackground(Void... params)

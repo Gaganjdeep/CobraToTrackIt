@@ -32,6 +32,7 @@ import car.gagan.cobratotrackit.utills.BaseFragmentHome;
 import car.gagan.cobratotrackit.utills.CallBackWebService;
 import car.gagan.cobratotrackit.utills.Global_Constants;
 import car.gagan.cobratotrackit.utills.Utills_G;
+import car.gagan.cobratotrackit.webservice.SendGetPositionMessage;
 import car.gagan.cobratotrackit.webservice.SuperWebServiceG;
 
 /**
@@ -103,6 +104,10 @@ public class LocationFragment extends BaseFragmentHome
         }
 
         setUpMapIfNeeded();
+
+
+        new SendGetPositionMessage(getUnitID()).execute();
+
 
 
         super.onResume();

@@ -31,7 +31,7 @@ public class BaseFragmentHome extends Fragment
     {
         SharedPreferences shrdPref = getActivity().getSharedPreferences(Global_Constants.shared_pref_name, Context.MODE_PRIVATE);
 
-        return shrdPref.getString(Global_Constants.VEHICLEID, "");
+        return shrdPref.getString(Global_Constants.VEHICLEID, "454");
     }
 
 
@@ -47,7 +47,6 @@ public class BaseFragmentHome extends Fragment
     public String selectedLanguage()
     {
         SharedPreferences preference = getActivity().getSharedPreferences("Preference", Context.MODE_PRIVATE);
-
         return preference.getString("language", "en");
     }
 
@@ -56,7 +55,6 @@ public class BaseFragmentHome extends Fragment
     {
         FragmentManager fragmentManager = getChildFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.layoutvehicleInfo, new VehicleInfofragment()).commit();
-
     }
 
 

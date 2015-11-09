@@ -1,21 +1,20 @@
 package car.gagan.cobratotrackit.Classes.Fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
+import car.gagan.cobratotrackit.Adapters.TripReportAdapter;
 import car.gagan.cobratotrackit.R;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -23,34 +22,32 @@ import com.google.android.gms.maps.model.LatLng;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import car.gagan.cobratotrackit.model.EventsModel;
 import car.gagan.cobratotrackit.model.TripHistoryModel;
 import car.gagan.cobratotrackit.utills.BaseFragmentHome;
 import car.gagan.cobratotrackit.utills.CallBackWebService;
+import car.gagan.cobratotrackit.utills.DateUtilsG;
 import car.gagan.cobratotrackit.utills.Global_Constants;
-import car.gagan.cobratotrackit.utills.Utills_G;
 import car.gagan.cobratotrackit.webservice.SuperWebServiceG;
 
 public class TripReport extends BaseFragmentHome
 {
-    private final int[] theme1 = {R.color.lt_grey, R.color.black, R.color.red};
-    private final int[] theme2 = {R.color.lt_grey, R.color.black, R.color.red};
 
-
-    //    private Dialog dialog;
-    private final int[] theme3 = {R.color.grey, R.color.red, R.color.black};
-    private LinearLayout LayoutNoti;
+    private ListView listVTripReport;
     SharedPreferences shrdPref;
 
 
     private static List<TripHistoryModel> listData;
+    private TripReportAdapter adapter;
+
+
+    ProgressBar progressBarTripReport;
+
+    private static int daysBack = 4;
+
 
     public TripReport()
     {
@@ -74,29 +71,29 @@ public class TripReport extends BaseFragmentHome
 
         shrdPref = getActivity().getSharedPreferences(Global_Constants.shared_pref_name, Context.MODE_PRIVATE);
 
-        LayoutNoti = (LinearLayout) v.findViewById(R.id.LayoutNoti);
+//        listVTripReport=new EndlessListview(getActivity());
+        listVTripReport = (ListView) v.findViewById(R.id.listVTripReport);
+        progressBarTripReport = (ProgressBar) v.findViewById(R.id.progressBarTripReport);
+        progressBarTripReport.getIndeterminateDrawable().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+
+        progressBarTripReport.setVisibility(View.VISIBLE);
 
 
         if (listData != null && listData.size() > 0)
         {
-            for (TripHistoryModel data : listData)
-            {
-                ShowTripReportList(LayoutNoti, data, 1);
-            }
+            progressBarTripReport.setVisibility(View.GONE);
 
+            adapter = new TripReportAdapter(getActivity(), listData);
+            listVTripReport.setAdapter(adapter);
+//            listVTripReport.setListener(TripReport.this);
         }
 
 
-        Calendar c = Calendar.getInstance();
-        Date date = c.getTime();
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-
-        gethistory("2000-01-01", sdf.format(date), getVehicleID(), selectedLanguage());
+        gethistory(DateUtilsG.getStartDate(daysBack), DateUtilsG.getCurrentDate(), getVehicleID(), selectedLanguage());
 
         return v;
     }
+
 
     private void setupToolbar(View V)
     {
@@ -117,6 +114,7 @@ public class TripReport extends BaseFragmentHome
                 try
                 {
 
+
 //                    if (dialog.isShowing())
 //                    {
 //                        dialog.dismiss();
@@ -127,7 +125,7 @@ public class TripReport extends BaseFragmentHome
                         listData = new ArrayList<>();
                     }
                     listData.clear();
-                    LayoutNoti.removeAllViews();
+//                    listVTripReport.removeAllViews();
 
                     JSONObject jObj = new JSONObject(output);
 
@@ -172,7 +170,7 @@ public class TripReport extends BaseFragmentHome
 
                             listData.add(data);
 
-                            ShowTripReportList(LayoutNoti, data, i);
+//                            ShowTripReportList(LayoutNoti, data, i);
 
 
                         }
@@ -180,10 +178,24 @@ public class TripReport extends BaseFragmentHome
 
                     }
 
+                    if (adapter == null)
+                    {
+                        adapter = new TripReportAdapter(getActivity(), listData);
+                        listVTripReport.setAdapter(adapter);
+//                        listVTripReport.setListener(TripReport.this);
+                    }
+                    else
+                    {
+                        adapter.notifyDataSetChanged();
+                    }
+
+
+                    progressBarTripReport.setVisibility(View.GONE);
 
                 }
                 catch (Exception e)
                 {
+                    progressBarTripReport.setVisibility(View.GONE);
                     e.printStackTrace();
                 }
 
@@ -193,89 +205,11 @@ public class TripReport extends BaseFragmentHome
 
     }
 
-    private void ShowTripReportList(LinearLayout layoutContainer, final TripHistoryModel data, int position)
-    {
-        final LinearLayout layoutMsgContainer = new LinearLayout(getActivity());
-
-        View viewOther = LayoutInflater.from(getActivity()).inflate(R.layout.inflator_trip_report, layoutMsgContainer);
-
-        CardView layoutbackgroudTripReport = (CardView) viewOther.findViewById(R.id.cardV);
-
-        TextView txtv_speed_Report = (TextView) viewOther.findViewById(R.id.txtv_speed_Report);
-        TextView txtv_Topspeed_Report = (TextView) viewOther.findViewById(R.id.txtv_Topspeed_Report);
-        TextView txtv_km_Report = (TextView) viewOther.findViewById(R.id.txtv_km_Report);
-        TextView txtv_time_Report = (TextView) viewOther.findViewById(R.id.txtv_time_Report);
-        TextView txtv_date_Report = (TextView) viewOther.findViewById(R.id.txtv_date_Report);
-
-        TextView txtv_StartAddress = (TextView) viewOther.findViewById(R.id.txtv_StartAddress);
-        TextView txtv_EndAddress = (TextView) viewOther.findViewById(R.id.txtv_EndAddress);
-
-        changeColor(layoutbackgroudTripReport, txtv_speed_Report, txtv_Topspeed_Report, position);
-
-        txtv_speed_Report.setText(data.getAverageSpeed());
-        txtv_Topspeed_Report.setText(data.getTopSpeed());
-
-        String km = data.getKilometer().contains(".") ? (data.getKilometer().substring(0, data.getKilometer().indexOf("."))) : data.getKilometer();
-
-        txtv_km_Report.setText(Html.fromHtml(km + "<small><font color=black> km</font></small>"));
-        txtv_time_Report.setText(Html.fromHtml(data.getTripDuration() + "<small><font color=black> min</font></small>"));
-
-        txtv_date_Report.setText(Utills_G.format_date(data.getEndTime(), Global_Constants.SERVERTIME_FORMAT, Global_Constants.TIMEFORMAT_HISTORY));
-
-        txtv_StartAddress.setText(data.getAddressFrom().isEmpty() ? "" : String.format("%s : %s", getResources().getString(R.string.start), data.getAddressFrom()));
-        txtv_EndAddress.setText(data.getAddressTo().isEmpty() ? "" : String.format("%s : %s", getResources().getString(R.string.end), data.getAddressTo()));
-
-        layoutContainer.addView(layoutMsgContainer);
-
-        layoutContainer.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                startGoogleMaps(data.getLatLngTo(), data.getLatlngFrom());
-            }
-        });
-    }
-
-    private void changeColor(CardView layout, TextView tvAvgSpeed, TextView tvTopSpeed, int position)
-    {
-//
-//        if (position % 3 == 0)
-//        {
-        layout.setCardBackgroundColor(getResources().getColor(theme1[0]));
-        tvAvgSpeed.setBackgroundColor(getResources().getColor(theme1[1]));
-        tvTopSpeed.setBackgroundColor(getResources().getColor(theme1[2]));
-
-//        }
-//        else if (position % 2 == 0)
-//        {
-//
-//            layout.setCardBackgroundColor(getResources().getColor(theme2[0]));
-//            tvAvgSpeed.setBackgroundColor(getResources().getColor(theme2[1]));
-//            tvTopSpeed.setBackgroundColor(getResources().getColor(theme2[2]));
-//
-//        }
-//        else
-//        {
-//
-//            layout.setCardBackgroundColor(getResources().getColor(theme3[0]));
-//            tvAvgSpeed.setBackgroundColor(getResources().getColor(theme3[1]));
-//            tvTopSpeed.setBackgroundColor(getResources().getColor(theme3[2]));
-//
-//        }
-
-
-    }
 
     private String urlToTripHistory(String startDate, String endDate, String vehicleID, String lanuage)
     {
         return Global_Constants.URL + "Customer/GetTripHistory?StartDate=" + startDate + "&EndDate=" + endDate + "&VehicleId=" + vehicleID + "&Language=" + lanuage;
     }
 
-    private void startGoogleMaps(LatLng ltlngDestination, LatLng ltlngSource)
-    {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?daddr=" + ltlngDestination.latitude + "," + ltlngDestination.longitude + "&saddr=" + ltlngSource.latitude + "," + ltlngSource.longitude));
-        getActivity().startActivity(intent);
-    }
 
 }

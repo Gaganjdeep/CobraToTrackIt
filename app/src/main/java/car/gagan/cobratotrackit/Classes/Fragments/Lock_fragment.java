@@ -74,7 +74,7 @@ public class Lock_fragment extends BaseFragmentHome implements View.OnClickListe
         switch (view.getId())
         {
             case R.id.btnLock:
-
+                SuperWebServiceG.cancelPrevious();
                 new SuperWebServiceG(LOCK_URL + getUnitID(), new HashMap<String, String>(), new CallBackWebService()
                 {
                     @Override
@@ -106,7 +106,7 @@ public class Lock_fragment extends BaseFragmentHome implements View.OnClickListe
                 break;
 
             case R.id.btnUnLock:
-
+                SuperWebServiceG.cancelPrevious();
                 new SuperWebServiceG(UNLOCK_URL + getUnitID(), new HashMap<String, String>(), new CallBackWebService()
                 {
                     @Override
@@ -137,7 +137,7 @@ public class Lock_fragment extends BaseFragmentHome implements View.OnClickListe
             case R.id.btnDisArm:
 
 //                http://112.196.34.42:8091/Gateway/SendDisarmImmobilizer?UnitID=0355255040459043
-
+                SuperWebServiceG.cancelPrevious();
 
                 new SuperWebServiceG(DISARM_URL + getUnitID(), new HashMap<String, String>(), new CallBackWebService()
                 {
