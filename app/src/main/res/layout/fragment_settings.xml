@@ -314,7 +314,7 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textColor="@color/lt_grey"
-                android:text="@string/version_info"
+                android:text="Version 1.3"
                 />
 
 

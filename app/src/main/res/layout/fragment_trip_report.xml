@@ -19,31 +19,34 @@
 
         <TextView
             android:id="@+id/txtvHeading"
+            style="@style/MyMaterialTheme.titles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@null"
             android:layout_gravity="center"
-            style="@style/MyMaterialTheme.titles"
+            android:background="@null"
             android:text="Notifications"/>
 
 
     </android.support.v7.widget.Toolbar>
 
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/LayoutNoti"
+        <ListView
+            android:id="@+id/listVTripReport"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/background"
+            android:dividerHeight="1dp"/>
+
+        <ProgressBar
+            android:id="@+id/progressBarTripReport"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        </LinearLayout>
+            android:layout_gravity="center"/>
 
 
-    </ScrollView>
-
-
+    </FrameLayout>
 </LinearLayout>
