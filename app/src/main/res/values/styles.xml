@@ -1,7 +1,7 @@
 <resources>
 
     <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
-
+        <item name="colorControlNormal">@color/white</item>
     </style>
 
     <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
@@ -56,5 +56,9 @@
     <style name="Color1SwitchStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorControlActivated">@color/red</item>
     </style>
+
+    <style name="MyMaterialTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="MyMaterialTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
 </resources>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="app_name">CobraToTrackIt</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+
+    <string name="DoorsLock">Охрана вкл.</string>
+    <string name="DoorsUnLock">Охрана выкл.</string>
+    <string name="alarm_off">Снятия с охраны</string>
+
+    <string name="connect_to_vehicle">подключение к транспортного средства</string>
+    <string name="enter_code">Введите ПИН-код</string>
+
+    <string name="phone_number">мобилного телефона</string>
+    <string name="license_plate">מספק רכב</string>
+
+
+    <string name="email">דואר אלקטרוני</string>
+
+
+    <string name="register_top_text">Пожалуйста заполните ваши данные. (подленные данные)</string>
+    <string name="tracking">Найти автомобиль</string>
+    <string name="please_try_again">Сообщение об ошибке</string>
+
+
+    <string name="version_info">גרסה 1.2</string>
+    <string name="notifications">Настройки</string>
+    <string name="trip_report">Отчет о поездке</string>
+    <string name="address">Адрес</string>
+
+
+    <string name="select_lang">Язык</string>
+    <string name="language">Язык</string>
+    <string name="contact">Свзяться с нами</string>
+    <string name="settings">Настройки</string>
+
+
+    <string name="english">English</string>
+    <string name="hebrew">עברית</string>
+
+
+    <string name="general">Общее</string>
+
+    <string name="privacy_policy">политика конфиденциальности</string>
+
+
+    <string name="about">Кто мыו</string>
+    <string name="logout">Выход</string>
+    <string name="engine_status">Состояние двигателя</string>
+    <string name="battery_status">Состояние аккумулятора</string>
+    <string name="show_route">Показать путь</string>
+
+
+    <string name="last_updated_on">Последнее обновление</string>
+    <string name="licence_plate">Номер автомобиля</string>
+    <string name="please_enter_code">Введите ПИН-код</string>
+
+
+    <string name="lights_off">включенный свет</string>
+    <string name="lights_on">выключить свет</string>
+
+
+    <string name="stop_tracking">прекратить отслеживание</string>
+
+
+    <string name="start_engine">Зажигание открыто</string>
+    <string name="stop_engine">Зажигание закрыто</string>
+    <string name="translating_to">תרגום ל</string>
+
+
+    <string name="location">Состояние автомобиля</string>
+    <string name="lights">Фары</string>
+    <string name="engine">Двигатель</string>
+    <string name="lock">Запереть</string>
+    <string name="average_speed">Средняя скорость</string>
+    <string name="top_speed">Макс. Скорость</string>
+
+    <string name="do_u_want_to_logout">Вы хотите выйти</string>
+
+    <string name="ok">Хорошо</string>
+    <string name="cancel">Отмена</string>
+
+
+    <string name="start">Начать</string>
+    <string name="end">Закончить</string>
+
+
+    <string name="battery_Normal">Аккумулятор в порядке</string>
+    <string name="Battery_low">Слабый заряд аккумулятора</string>
+    <string name="battery_empty">Аккумулятор полностью разряжен</string>
+    <string name="russian">Russian</string>
+    <string name="please_select_language">Пожалуйста, выберите язык ..</string>
+    <string name="distance">расстояние</string>
+    <string name="time">время</string>
+    <string name="done">сделанный</string>
+    <string name="driving_time">"Время поездки: "</string>
+    <string name="parking_time">"Парковка Время: "</string>
+
+
+</resources>

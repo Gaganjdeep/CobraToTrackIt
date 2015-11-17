@@ -49,6 +49,25 @@
     <string name="start_engine">Start Engine</string>
     <string name="stop_engine">Stop Engine</string>
     <string name="translating_to">Translating to</string>
+    <string name="location">Location</string>
+    <string name="lights">Lights</string>
+    <string name="lock">Lock</string>
+    <string name="engine">Engine</string>
+    <string name="average_speed">Average Speed</string>
+    <string name="top_speed">Top Speed</string>
+    <string name="do_u_want_to_logout">Do you want to log out.</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="start">START</string>
+    <string name="end">END</string>
+    <string name="russian">Russian</string>
+    <string name="please_select_language">Please select an language..</string>
+    <string name="distance">distance</string>
+    <string name="time">time</string>
+    <string name="done">Done</string>
+    <string name="title_activity_trip_report"></string>
+    <string name="driving_time">"Driving Time: "</string>
+    <string name="parking_time">"Parking Time: "</string>
 
 
 </resources>

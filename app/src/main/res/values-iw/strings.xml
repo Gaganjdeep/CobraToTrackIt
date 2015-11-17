@@ -4,29 +4,32 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
 
-    <string name="DoorsLock">לנעול</string>
-    <string name="DoorsUnLock">נעילה</string>
-    <string name="alarm_off">לוח מקשים</string>
+    <string name="DoorsLock">דריכת מערכת</string>
+    <string name="DoorsUnLock">נטרול מערכת</string>
+    <string name="alarm_off">נטרול קודנית</string>
 
     <string name="connect_to_vehicle"> חבר לרכב</string>
     <string name="enter_code">הזן את קוד SMS</string>
-    <string name="phone_number">מספר טלפון</string>
-    <string name="license_plate"> פלייט רישיון</string>
+
+    <string name="phone_number">מספר טל\' נייד</string>
+    <string name="license_plate">מספק רכב</string>
+
+
     <string name="email">דואר אלקטרוני</string>
-    <string name="register_top_text">נא להזין את המידע שלך למטה את כתובת הדוא"ל של חייכם ומספר הטלפון יהפוך לחלק מהפרופיל שלך קוברה</string>
-    <string name="tracking">מעקב</string>
-    <string name="please_try_again">אנא נסה שוב.</string>
+    <string name="register_top_text">אנא הכנס את המידע בשדות המתאים, מספר הרכב ומספר הטלפון הנייד שלך הרשומים במערכת חיים להיות תואמים</string>
+    <string name="tracking">עקיבה</string>
+    <string name="please_try_again">הודעת שגיאה</string>
 
 
-    <string name="version_info">גרסה 1.1</string>
-    <string name="notifications">הודעות</string>
-    <string name="trip_report"> דוחות טיול</string>
+    <string name="version_info">גרסה 1.2</string>
+    <string name="notifications">התראות</string>
+    <string name="trip_report">דוח נסיעות</string>
     <string name="address">כתובת</string>
 
 
     <string name="select_lang">בחר שפה</string>
     <string name="language">שפה</string>
-    <string name="contact">קשר</string>
+    <string name="contact">צור קשר</string>
     <string name="settings">הגדרות</string>
 
 
@@ -34,23 +37,49 @@
     <string name="hebrew">עברית</string>
     <string name="general">כללי</string>
     <string name="privacy_policy">מדיניות פרטיות</string>
-    <string name="about">אודות</string>
-    <string name="logout">התחבר מתוך</string>
-    <string name="engine_status">סטטוס מנוע</string>
-    <string name="battery_status">מצב סוללה</string>
-    <string name="show_route">הצג מסלול</string>
+    <string name="about">מי אנחנו</string>
+    <string name="logout">יציאה</string>
+    <string name="engine_status">מצב מנוע</string>
+    <string name="battery_status">מצב מצבר</string>
+    <string name="show_route">הראה מסלול לרכב</string>
 
 
-    <string name="last_updated_on">עודכן לאחרונה ב</string>
+    <string name="last_updated_on">עדכון אחרון</string>
     <string name="licence_plate">פלייט רישיון</string>
-    <string name="please_enter_code">נא להזין את קוד ארבע ספרות.</string>
+    <string name="please_enter_code">אנא הקש את מס\' הקוד ברכב שלך</string>
 
 
     <string name="lights_off">אורות כבוי</string>
     <string name="lights_on">אורות</string>
     <string name="stop_tracking">לעצור מעקב</string>
-    <string name="start_engine">התחל מנוע</string>
-    <string name="stop_engine">לעצור מנוע</string>
+    <string name="start_engine">רכב מונע</string>
+    <string name="stop_engine">רכב כב</string>
     <string name="translating_to">תרגום ל</string>
+
+
+    <string name="location">מצב רכב</string>
+    <string name="lights">אורות</string>
+    <string name="engine">מנוע</string>
+    <string name="lock">נעילה</string>
+    <string name="average_speed">מהירות ממוצעת</string>
+    <string name="top_speed">מהירות מרבית</string>
+    <string name="do_u_want_to_logout">האם אתה רוצה להתנתק.</string>
+    <string name="ok">אוקיי</string>
+    <string name="cancel">לבטל</string>
+    <string name="start">התחלה</string>
+    <string name="end">סוף</string>
+
+
+    <string name="battery_Normal">מצבר תקין</string>
+    <string name="Battery_low">מצבר חלש</string>
+    <string name="battery_empty">מצבר ריק</string>
+    <string name="russian">Russian</string>
+    <string name="please_select_language">אנא בחר שפה ..</string>
+    <string name="distance">מֶרְחָק</string>
+    <string name="time">זְמַן</string>
+    <string name="done">בוצע</string>
+    <string name="driving_time">"זמן נסיעה: "</string>
+    <string name="parking_time">"זמן חניה: "</string>
+
 
 </resources>

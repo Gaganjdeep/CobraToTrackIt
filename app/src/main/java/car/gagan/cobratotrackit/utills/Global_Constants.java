@@ -55,5 +55,5 @@ public class Global_Constants
     public final static String TIMEFORMAT_HISTORY = "EEE dd MMMM yyyy,hh:mm a";
     public final static String TIMEFORMAT_NOTIFICATION = "dd-MM-yyyy | HH:mm";
 
-
+    public final static String TIMEFORMAT_TRIP_DAILY = "dd/MM/yyyy";
 }

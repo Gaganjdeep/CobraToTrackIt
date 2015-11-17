@@ -120,7 +120,7 @@
                 android:gravity="center"
                 android:onClick="doNe"
                 android:padding="10dp"
-                android:text="Done"
+                android:text="@string/done"
                 android:textAllCaps="false"
                 android:textColor="@color/white"/>
         </LinearLayout>

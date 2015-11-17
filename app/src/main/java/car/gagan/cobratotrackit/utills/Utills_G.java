@@ -124,7 +124,7 @@ public class Utills_G
 
     }
 
-    static Locale myLocale;
+    public static Locale myLocale;
 
     public static void change_language(String lang, Context con)
     {
@@ -134,6 +134,19 @@ public class Utills_G
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
+
+
+    }
+
+
+    public static Locale currentLocale(Context con)
+    {
+//        SharedPreferences preference = con.getSharedPreferences("Preference", Context.MODE_PRIVATE);
+
+//        return new Locale(preference.getString("language", "en"));
+
+
+        return con.getResources().getConfiguration().locale;
     }
 
 
@@ -253,13 +266,18 @@ public class Utills_G
     }
 
 
-    public static String format_date(String date, String inputFormat, String outputFormat)
+    public static String format_date(Context con, String date, String inputFormat, String outputFormat)
     {
+
+
         SimpleDateFormat sdfs = new SimpleDateFormat(inputFormat, Locale.US);
+
+
         Date date_ = null;
         try
         {
             date_ = sdfs.parse(date);
+
 
         }
         catch (Exception e)
@@ -274,7 +292,6 @@ public class Utills_G
 
     public static String dateToString(Date date, String format)
     {
-
         try
         {
             String strDate = "";

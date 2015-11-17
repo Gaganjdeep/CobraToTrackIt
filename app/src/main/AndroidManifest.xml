@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    package="car.gagan.cobratotrackit"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="car.gagan.cobratotrackit">
 
     <permission
         android:name="car.gagan.cobratotrackit.permission.MAPS_RECEIVE"
@@ -35,12 +34,12 @@
         android:largeHeap="true"
         android:theme="@style/MyMaterialTheme">
         <activity
-            android:name="car.gagan.cobratotrackit.Classes.MainActivity"
+            android:name=".Classes.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="car.gagan.cobratotrackit.Classes.Splash_Cobra"
+            android:name=".Classes.Splash_Cobra"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -49,22 +48,26 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="car.gagan.cobratotrackit.Classes.Register_Screen"
+            android:name=".Classes.Register_Screen"
             android:label="Registeration"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="car.gagan.cobratotrackit.Classes.Verfication_Screen"
+            android:name=".Classes.Verfication_Screen"
             android:label="Verification"
             android:screenOrientation="portrait">
         </activity>
-
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBYbo6JTS8u_MquPmuoJILokZDUo72mg4I"/>
 
-
+        <activity
+            android:name=".Classes.TripReportActivity"
+            android:label=""
+            android:theme="@style/MyMaterialTheme"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
-</manifest>
 
+</manifest>

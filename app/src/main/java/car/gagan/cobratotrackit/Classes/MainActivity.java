@@ -20,6 +20,7 @@ import car.gagan.cobratotrackit.Classes.Fragments.LocationFragment;
 import car.gagan.cobratotrackit.Classes.Fragments.Notification;
 import car.gagan.cobratotrackit.Classes.Fragments.Settings;
 import car.gagan.cobratotrackit.Classes.Fragments.TripReport;
+import car.gagan.cobratotrackit.Classes.Fragments.TripReportDaily;
 import car.gagan.cobratotrackit.R;
 
 public class MainActivity extends AppCompatActivity
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity
     {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new Home(), "Home");
-        adapter.addFragment(new TripReport(), "TripReport");
+        adapter.addFragment(new TripReportDaily(), "TripReport");
         adapter.addFragment(new Notification(), "notifications");
         adapter.addFragment(new LocationFragment(), "location");
         adapter.addFragment(new Settings(), "Settings");

@@ -1,23 +1,24 @@
 package car.gagan.cobratotrackit.Classes.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import car.gagan.cobratotrackit.Adapters.TripReportAdapter;
+import car.gagan.cobratotrackit.Adapters.TripReportDailyAdapter;
+import car.gagan.cobratotrackit.Classes.TripReportActivity;
 import car.gagan.cobratotrackit.R;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import car.gagan.cobratotrackit.model.TripHistoryDailyModel;
 import car.gagan.cobratotrackit.model.TripHistoryModel;
 import car.gagan.cobratotrackit.utills.BaseFragmentHome;
 import car.gagan.cobratotrackit.utills.CallBackWebService;
@@ -36,30 +38,28 @@ import car.gagan.cobratotrackit.utills.DateUtilsG;
 import car.gagan.cobratotrackit.utills.Global_Constants;
 import car.gagan.cobratotrackit.webservice.SuperWebServiceG;
 
-public class TripReport extends BaseFragmentHome
+/**
+ * Created by gagandeep on 16/11/15.
+ */
+public class TripReportDaily extends BaseFragmentHome
 {
 
     private ListView listVTripReport;
     SharedPreferences shrdPref;
 
 
-    private List<TripHistoryModel> listData;
-    private TripReportAdapter adapter;
+    private static List<TripHistoryDailyModel> listData;
+    private TripReportDailyAdapter adapter;
 
 
     ProgressBar progressBarTripReport;
 
-    private static int daysBack = 4;
+    private static int daysBack = 7;
 
-    String dateToStart = "";
 
-    public TripReport()
+    public TripReportDaily()
     {
-    }
-
-    public TripReport(String date)
-    {
-        dateToStart = date;
+        // Required empty public constructor
     }
 
     @Override
@@ -79,25 +79,24 @@ public class TripReport extends BaseFragmentHome
 
         shrdPref = getActivity().getSharedPreferences(Global_Constants.shared_pref_name, Context.MODE_PRIVATE);
 
-//        listVTripReport=new EndlessListview(getActivity());
         listVTripReport = (ListView) v.findViewById(R.id.listVTripReport);
         progressBarTripReport = (ProgressBar) v.findViewById(R.id.progressBarTripReport);
         progressBarTripReport.getIndeterminateDrawable().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
 
         progressBarTripReport.setVisibility(View.VISIBLE);
 
-//
-//        if (listData != null && listData.size() > 0)
-//        {
-//            progressBarTripReport.setVisibility(View.GONE);
-//
-//            adapter = new TripReportAdapter(getActivity(), listData);
-//            listVTripReport.setAdapter(adapter);
-////            listVTripReport.setListener(TripReport.this);
-//        }
+
+        if (listData != null && listData.size() > 0)
+        {
+            progressBarTripReport.setVisibility(View.GONE);
+
+            adapter = new TripReportDailyAdapter(getActivity(), listData);
+            listVTripReport.setAdapter(adapter);
+
+        }
 
 
-        gethistory(DateUtilsG.dateToString(dateToStart), DateUtilsG.dateToStringAddOneDay(dateToStart), getVehicleID(), selectedLanguage());
+        gethistory(DateUtilsG.getStartDate(daysBack), DateUtilsG.getCurrentDate(), getVehicleID(), selectedLanguage());
 
         return v;
     }
@@ -109,39 +108,7 @@ public class TripReport extends BaseFragmentHome
 
         ((TextView) toolbar.findViewById(R.id.txtvHeading)).setText(R.string.trip_report);
 
-
-        try
-        {
-            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            setHasOptionsMenu(true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-
-        switch (item.getItemId())
-        {
-
-            case android.R.id.home:
-
-                getActivity().onBackPressed();
-
-                return true;
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 
     private void gethistory(String startDate, String endDate, String vehicleID, String language)
     {
@@ -154,12 +121,12 @@ public class TripReport extends BaseFragmentHome
                 try
                 {
 
+
                     if (listData == null)
                     {
                         listData = new ArrayList<>();
                     }
                     listData.clear();
-//                    listVTripReport.removeAllViews();
 
                     JSONObject jObj = new JSONObject(output);
 
@@ -173,34 +140,19 @@ public class TripReport extends BaseFragmentHome
                         {
 
                             JSONObject jobjInner = jobjinnerArray.getJSONObject(i);
-                            TripHistoryModel data = new TripHistoryModel();
+                            TripHistoryDailyModel data = new TripHistoryDailyModel();
 
+//    {"VehicleId":1379,"Date":"1/1/2000 12:00:00 AM","TotalTripCount":"0","TotalDrivingTime":"00:00:00",
+//            "TotalParkingTime":"00:00:00","MaxSpeed":"0","AverageSpeed":""}
 
-                            data.setAddressFrom(jobjInner.optString("AddressFrom"));
-                            data.setAddressTo(jobjInner.optString("AddressTo"));
+                            data.setVehicleId(jobjInner.optString("VehicleId"));
                             data.setAverageSpeed(jobjInner.optString("AverageSpeed"));
-                            data.setEndTime(jobjInner.optString("EndTime"));
-                            data.setKilometer(jobjInner.optString("Kilometer"));
-                            data.setStartTime(jobjInner.optString("StartTime"));
-                            data.setTopSpeed(jobjInner.optString("TopSpeed"));
-                            data.setTripDuration(jobjInner.optString("TripDuration"));
+                            data.setMaxSpeed(jobjInner.optString("MaxSpeed"));
+                            data.setDate(jobjInner.optString("Date"));
+                            data.setTotalTripCount(jobjInner.optString("TotalTripCount"));
+                            data.setTotalDrivingTime(jobjInner.optString("TotalDrivingTime"));
+                            data.setTotalParkingTime(jobjInner.optString("TotalParkingTime"));
 
-                            try
-                            {
-                                LatLng latlng = new LatLng(Double.parseDouble(jobjInner.optString("LatitudeTo")), Double.parseDouble(jobjInner.optString("LongitudeTo")));
-
-                                data.setLatLngTo(latlng);
-
-                                LatLng latlngFrom = new LatLng(Double.parseDouble(jobjInner.optString("LatitudeFrom")), Double.parseDouble(jobjInner.optString("LongitudeFrom")));
-
-                                data.setLatlngFrom(latlngFrom);
-
-
-                            }
-                            catch (NumberFormatException e)
-                            {
-                                e.printStackTrace();
-                            }
 
                             listData.add(data);
 
@@ -214,9 +166,9 @@ public class TripReport extends BaseFragmentHome
 
                     if (adapter == null)
                     {
-                        adapter = new TripReportAdapter(getActivity(), listData);
+                        adapter = new TripReportDailyAdapter(getActivity(), listData);
                         listVTripReport.setAdapter(adapter);
-//                        listVTripReport.setListener(TripReport.this);
+
                     }
                     else
                     {
@@ -242,7 +194,7 @@ public class TripReport extends BaseFragmentHome
 
     private String urlToTripHistory(String startDate, String endDate, String vehicleID, String lanuage)
     {
-        return Global_Constants.URL + "Customer/GetTripHistory?StartDate=" + startDate + "&EndDate=" + endDate + "&VehicleId=" + vehicleID + "&Language=" + lanuage;
+        return Global_Constants.URL + "Customer/GetTripHistoryDaily?StartDate=" + startDate + "&EndDate=" + endDate + "&VehicleId=" + vehicleID + "&Language=" + lanuage;
     }
 
 

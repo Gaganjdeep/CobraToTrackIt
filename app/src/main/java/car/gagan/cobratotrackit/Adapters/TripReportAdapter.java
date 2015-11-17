@@ -102,10 +102,11 @@ public class TripReportAdapter extends BaseAdapter
 
         String km = data.getKilometer().contains(".") ? (data.getKilometer().substring(0, data.getKilometer().indexOf("."))) : data.getKilometer();
 
-        txtv_km_Report.setText(Html.fromHtml(km + "<small><font color=black> km</font></small>"));
-        txtv_time_Report.setText(Html.fromHtml(data.getTripDuration() + "<small><font color=black> min</font></small>"));
+        txtv_km_Report.setText(Html.fromHtml(km + " " + "<small>" + con.getResources().getString(R.string.distance) + "</small>"));
+        txtv_time_Report.setText(Html.fromHtml(data.getTripDuration() + " " + "<small>" + con.getResources().getString(R.string.time) + "</small>"));
 
-        txtv_date_Report.setText(Utills_G.format_date(data.getEndTime(), Global_Constants.SERVERTIME_FORMAT, Global_Constants.TIMEFORMAT_HISTORY));
+
+        txtv_date_Report.setText(Utills_G.format_date(con, data.getEndTime(), Global_Constants.SERVERTIME_FORMAT, Global_Constants.TIMEFORMAT_HISTORY));
 
         txtv_StartAddress.setText(data.getAddressFrom().isEmpty() ? "" : String.format("%s : %s", con.getString(R.string.start), data.getAddressFrom()));
         txtv_EndAddress.setText(data.getAddressTo().isEmpty() ? "" : String.format("%s : %s", con.getString(R.string.end), data.getAddressTo()));
