@@ -1,7 +1,10 @@
 package car.gagan.cobratotrackit.Adapters;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.Collections;
 import java.util.List;
 
 import car.gagan.cobratotrackit.Classes.TripReportActivity;
@@ -31,6 +35,16 @@ public class TripReportDailyAdapter extends BaseAdapter
     {
         this.con = con;
         DataList = dataList;
+
+        try
+        {
+            Collections.reverse(DataList);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -79,7 +93,7 @@ public class TripReportDailyAdapter extends BaseAdapter
             TextView txtvAverageSpeed = (TextView) viewOther.findViewById(R.id.txtvAverageSpeed);
             TextView txtvParkingTime = (TextView) viewOther.findViewById(R.id.txtvParkingTime);
             TextView txtvDrivingTime = (TextView) viewOther.findViewById(R.id.txtvDrivingTime);
-            TextView txtvDate = (TextView) viewOther.findViewById(R.id.txtvDate);
+            final TextView txtvDate = (TextView) viewOther.findViewById(R.id.txtvDate);
             TextView txtvCount = (TextView) viewOther.findViewById(R.id.txtvCount);
 
 
@@ -98,9 +112,12 @@ public class TripReportDailyAdapter extends BaseAdapter
                 @Override
                 public void onClick(View view)
                 {
-                    Intent gotoTripReport = new Intent(con, TripReportActivity.class);
-                    gotoTripReport.putExtra("date", data.getDate());
-                    con.startActivity(gotoTripReport);
+//                    Intent gotoTripReport = new Intent(con, TripReportActivity.class);
+//                    gotoTripReport.putExtra("date", data.getDate());
+//                    con.startActivity(gotoTripReport);
+
+                    transitionToActivity((Activity) con, TripReportActivity.class, txtvDate, data.getDate());
+
                 }
             });
 
@@ -112,6 +129,25 @@ public class TripReportDailyAdapter extends BaseAdapter
         }
 
 
+    }
+
+
+    private void transitionToActivity(Activity activity, Class target, View date, String dateString)
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            Intent i = new Intent(activity, target);
+            i.putExtra("date", dateString);
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity, android.util.Pair.create(date, "date"));
+            activity.startActivity(i, options.toBundle());
+
+        }
+        else
+        {
+            Intent gotoTripReport = new Intent(activity, target);
+            gotoTripReport.putExtra("date", dateString);
+            activity.startActivity(gotoTripReport);
+        }
     }
 
 

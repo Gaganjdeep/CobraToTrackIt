@@ -20,8 +20,6 @@ public class Global_Constants
 //    http://212.179.114.28:570/Gateway/SendGetPositionMessage?UnitID=0355255042579525
 
 
-
-
 //	edit.putString("FirstName", edFirstName.getText().toString());
 //	edit.putString("LastName", edLastName.getText().toString());
 //	edit.putString("MobileNo", edPhoneNumber.getText().toString());
@@ -52,7 +50,8 @@ public class Global_Constants
     //                                                     9/24/2015 2:27:11 AM
     public final static String SERVERTIME_FORMAT = "MM/dd/yyyy HH:mm:ss a";
 
-    public final static String TIMEFORMAT_HISTORY = "EEE dd MMMM yyyy,hh:mm a";
+    //    public final static String TIMEFORMAT_HISTORY = "EEE dd MMMM yyyy,hh:mm a";
+    public final static String TIMEFORMAT_HISTORY = "hh:mm a";
     public final static String TIMEFORMAT_NOTIFICATION = "dd-MM-yyyy | HH:mm";
 
     public final static String TIMEFORMAT_TRIP_DAILY = "dd/MM/yyyy";

@@ -106,41 +106,25 @@ public class TripReport extends BaseFragmentHome
     private void setupToolbar(View V)
     {
         Toolbar toolbar = (Toolbar) V.findViewById(R.id.toolbar);
+        toolbar.setVisibility(View.GONE);
+//        ((TextView) toolbar.findViewById(R.id.txtvHeading)).setText(R.string.trip_report);
 
-        ((TextView) toolbar.findViewById(R.id.txtvHeading)).setText(R.string.trip_report);
 
-
-        try
-        {
-            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            setHasOptionsMenu(true);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+//        try
+//        {
+//            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+//
+//            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            setHasOptionsMenu(true);
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
 
-        switch (item.getItemId())
-        {
-
-            case android.R.id.home:
-
-                getActivity().onBackPressed();
-
-                return true;
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
     private void gethistory(String startDate, String endDate, String vehicleID, String language)

@@ -160,6 +160,7 @@ public class Utills_G
         Button btnEnglish = (Button) global_dialog.findViewById(R.id.btnEnglish);
         Button btnHebrew = (Button) global_dialog.findViewById(R.id.btnHebrew);
         Button btnRussian = (Button) global_dialog.findViewById(R.id.btnRussian);
+        Button btnArabic = (Button) global_dialog.findViewById(R.id.btnArabic);
 
         tex.setText(R.string.please_select_language);
 
@@ -249,6 +250,21 @@ public class Utills_G
 
             }
         });
+
+
+        btnArabic.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v)
+            {
+                global_dialog.dismiss();
+
+
+            }
+        });
+
+
 
 
     }
