@@ -16,7 +16,7 @@ import car.gagan.cobratotrackit.utills.Global_Constants;
 import car.gagan.cobratotrackit.utills.Utills_G;
 
 /**
- * Created by gagandeep on 28/10/15.
+ * Created by gagandeep on 18 Nov 2015.
  */
 public class NotificationAdapter extends BaseAdapter
 {

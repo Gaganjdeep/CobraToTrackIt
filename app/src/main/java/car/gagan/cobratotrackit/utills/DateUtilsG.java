@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 /**
- * Created by gagandeep on 5/11/15.
+ * Created by gagandeep on 17 Nov 2015.
  */
 public class DateUtilsG
 {
@@ -57,23 +57,17 @@ public class DateUtilsG
 
     public static String dateToStringAddOneDay(String date)
     {
-
         SimpleDateFormat sdfs = new SimpleDateFormat(Global_Constants.SERVERTIME_FORMAT, Locale.US);
-
 
         Date date_ = null;
         try
         {
             date_ = sdfs.parse(date);
 
-
-            String strDate = "";
-
             Calendar cal = GregorianCalendar.getInstance();
             cal.setTime(date_);
             cal.add(Calendar.DAY_OF_YEAR, +1);
             return sdf.format(cal.getTime());
-
 
         }
         catch (Exception e)
@@ -82,15 +76,6 @@ public class DateUtilsG
             return "";
         }
     }
-
-
-
-
-
-
-
-
-
 
 
 }

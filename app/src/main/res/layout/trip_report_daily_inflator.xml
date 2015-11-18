@@ -13,7 +13,6 @@
         android:layout_margin="10dp"
         android:clickable="true"
         android:elevation="4dp"
-
         card_view:cardBackgroundColor="@color/lt_grey"
         card_view:cardCornerRadius="4dp">
 
@@ -59,14 +58,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="dafgte"
+                    android:text=""
+                    android:gravity="left"
                     android:textColor="#b5b5b5"/>
 
                 <TextView
                     android:id="@+id/txtvMaxSpeed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Count"
+                    android:text=""
+                    android:gravity="right"
                     android:textColor="#b5b5b5"/>
 
             </LinearLayout>
@@ -83,14 +84,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="dafgte"
+                    android:text=""
+                    android:gravity="left"
                     android:textColor="#b5b5b5"/>
 
                 <TextView
                     android:id="@+id/txtvAverageSpeed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Count"
+                    android:text=""
+                    android:gravity="right"
                     android:textColor="#b5b5b5"/>
 
             </LinearLayout>

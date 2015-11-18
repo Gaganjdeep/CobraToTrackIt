@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.Collections;
 import java.util.List;
 
 import car.gagan.cobratotrackit.Classes.TripReportActivity;
@@ -35,15 +34,6 @@ public class TripReportDailyAdapter extends BaseAdapter
     {
         this.con = con;
         DataList = dataList;
-
-        try
-        {
-            Collections.reverse(DataList);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
 
     }
 
@@ -97,8 +87,8 @@ public class TripReportDailyAdapter extends BaseAdapter
             TextView txtvCount = (TextView) viewOther.findViewById(R.id.txtvCount);
 
 
-            txtvMaxSpeed.setText(String.format("%s %s", con.getResources().getString(R.string.top_speed), data.getMaxSpeed()));
-            txtvAverageSpeed.setText(String.format("%s %s", con.getResources().getString(R.string.average_speed), data.getAverageSpeed()));
+            txtvMaxSpeed.setText(String.format("%s-%s", con.getResources().getString(R.string.top_speed), data.getMaxSpeed()));
+            txtvAverageSpeed.setText(String.format("%s-%s", con.getResources().getString(R.string.average_speed), data.getAverageSpeed()));
             txtvParkingTime.setText(String.format("%s%s", con.getResources().getString(R.string.driving_time), data.getTotalParkingTime()));
             txtvDrivingTime.setText(String.format("%s%s", con.getResources().getString(R.string.parking_time), data.getTotalDrivingTime()));
             txtvCount.setText(data.getTotalTripCount());
@@ -112,9 +102,6 @@ public class TripReportDailyAdapter extends BaseAdapter
                 @Override
                 public void onClick(View view)
                 {
-//                    Intent gotoTripReport = new Intent(con, TripReportActivity.class);
-//                    gotoTripReport.putExtra("date", data.getDate());
-//                    con.startActivity(gotoTripReport);
 
                     transitionToActivity((Activity) con, TripReportActivity.class, txtvDate, data.getDate());
 
