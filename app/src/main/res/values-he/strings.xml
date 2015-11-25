@@ -61,8 +61,10 @@
     <string name="lights">אורות</string>
     <string name="engine">מנוע</string>
     <string name="lock">נעילה</string>
-    <string name="average_speed">מהירות ממוצעת</string>
-    <string name="top_speed">מהירות מרבית</string>
+
+    <string name="average_speed">מהירות ממוצעת KPH</string>
+    <string name="top_speed">מהירות מרבית KPH</string>
+
     <string name="do_u_want_to_logout">האם אתה רוצה להתנתק.</string>
     <string name="ok">אוקיי</string>
     <string name="cancel">לבטל</string>
@@ -80,6 +82,10 @@
     <string name="done">בוצע</string>
     <string name="driving_time">"זמן נסיעה: "</string>
     <string name="parking_time">"זמן חניה: "</string>
+    <string name="updating_info">מידע עדכון</string>
+    <string name="unit_not_connected">יחידה אינה מחוברת לשרת או שגיאה התרחשה בשרת</string>
+    <string name="enter_sms_code">אנא הכנס את קוד האימות שנשלח אליך באמצעות SMS</string>
+    <string name="enter_keypad_code">אנא הכנס את הקוד שלך לוח המקשים</string>
 
 
 </resources>

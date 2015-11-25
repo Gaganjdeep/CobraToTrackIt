@@ -3,11 +3,10 @@ package car.gagan.cobratotrackit.utills;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 
+import org.json.JSONObject;
 
 import car.gagan.cobratotrackit.Classes.Fragments.VehicleInfofragment;
 import car.gagan.cobratotrackit.R;
@@ -56,6 +55,33 @@ public class BaseFragmentHome extends Fragment
         FragmentManager fragmentManager = getChildFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.layoutvehicleInfo, new VehicleInfofragment()).commit();
     }
+
+
+    public void showResponse(String output)
+    {
+
+        try
+        {
+            JSONObject jObj = new JSONObject(output);
+
+            if (jObj.getString(Global_Constants.Status).equalsIgnoreCase(Global_Constants.success))
+            {
+                Utills_G.show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
+            }
+            else
+            {
+                Utills_G.show_dialog_msg(getActivity(), getActivity().getResources().getString(R.string.unit_not_connected), null);
+            }
+
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 }

@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.transition.ChangeBounds;
 import android.transition.Scene;
@@ -20,17 +21,31 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
+import car.gagan.cobratotrackit.Classes.Register_Screen;
+import car.gagan.cobratotrackit.Classes.Verfication_Screen;
 import car.gagan.cobratotrackit.R;
 
 import car.gagan.cobratotrackit.Classes.MainActivity;
+import car.gagan.cobratotrackit.model.VehicleInfo;
+import car.gagan.cobratotrackit.utills.BaseFragmentHome;
 import car.gagan.cobratotrackit.utills.CallBackDialogOption;
+import car.gagan.cobratotrackit.utills.CallBackWebService;
 import car.gagan.cobratotrackit.utills.DialogReveal;
 import car.gagan.cobratotrackit.utills.Global_Constants;
+import car.gagan.cobratotrackit.utills.ImageDownloader;
+import car.gagan.cobratotrackit.utills.SharedPrefHelper;
+import car.gagan.cobratotrackit.utills.StoreData;
+import car.gagan.cobratotrackit.utills.Utills_G;
+import car.gagan.cobratotrackit.webservice.SuperWebServiceG;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Home extends android.support.v4.app.Fragment
+public class Home extends BaseFragmentHome
 {
 
 
@@ -47,10 +62,10 @@ public class Home extends android.support.v4.app.Fragment
 
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-//        settingToolBar(v);
-
 
         parentlayout = (FrameLayout) v.findViewById(R.id.parentlayout);
+
+        settingSwipeToRefresh(v);
 
 
         displayView(new Lock_fragment());
@@ -72,11 +87,82 @@ public class Home extends android.support.v4.app.Fragment
         }
     };
 
+
+    private void onRefreshG(final SwipeRefreshLayout swipeLayout)
+    {
+        Utills_G.showToast(getActivity().getResources().getString(R.string.updating_info), getActivity(), true);
+
+//        swipeLayout.setRefreshing(true);
+
+        String url = String.format("%sGateway/GetVehicleInfo?VehicleId=%s", Global_Constants.URL, getVehicleID());
+
+        new SuperWebServiceG(url, new HashMap<String, String>(), new CallBackWebService()
+        {
+            @Override
+            public void webOnFinish(String output)
+            {
+
+                try
+                {
+
+
+                    JSONObject jObj = new JSONObject(output);
+
+                    if (jObj.getString(Global_Constants.Status).equals(Global_Constants.success))
+                    {
+
+                        JSONObject jobjinner = new JSONObject(jObj.getString(Global_Constants.Message));
+
+                        StoreData.write(getActivity(), new VehicleInfo(jobjinner.optString("ModelName"), jobjinner.optString("ManufactorName"), jobjinner.optString("LastUpdatedOn"), jobjinner.optString("VehicleImageURL"), jobjinner.optString("LicensePlate")));
+
+
+                        SharedPrefHelper.editPref(getActivity(), jobjinner.optString("LastUpdatedOn"));
+
+                    }
+
+                }
+                catch (Exception | Error e)
+                {
+
+                    e.printStackTrace();
+                }
+
+                swipeLayout.setRefreshing(false);
+
+
+            }
+        }).execute();
+    }
+
+    private void settingSwipeToRefresh(View v)
+    {
+
+        final SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeLayout);
+        swipeLayout.setColorSchemeResources(
+                R.color.red,
+                R.color.grey,
+                R.color.red);
+
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+        {
+            @Override
+            public void onRefresh()
+            {
+
+
+                onRefreshG(swipeLayout);
+
+            }
+        });
+
+    }
+
+
 //    private void settingToolBar(View v)
 //    {
 //
 //        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-//        ImageButton btnOptions = (ImageButton) toolbar.findViewById(R.id.btnOptions);
+//        ImageButton btnOptions = (ImageButton) toolbar.findViewById(R.id.btnRefresh);
 //        btnOptions.setVisibility(View.VISIBLE);
 //        btnOptions.setOnClickListener(new View.OnClickListener()
 //        {
@@ -84,6 +170,45 @@ public class Home extends android.support.v4.app.Fragment
 //            public void onClick(View view)
 //            {
 //
+//                Utills_G.showToast(getActivity().getResources().getString(R.string.updating_info), getActivity(), true);
+//
+//
+//                String url = String.format("%sGateway/GetVehicleInfo?VehicleId=%s", Global_Constants.URL, getVehicleID());
+//
+//                new SuperWebServiceG(url, new HashMap<String, String>(), new CallBackWebService()
+//                {
+//                    @Override
+//                    public void webOnFinish(String output)
+//                    {
+//
+//                        try
+//                        {
+//
+//
+//                            JSONObject jObj = new JSONObject(output);
+//
+//                            if (jObj.getString(Global_Constants.Status).equals(Global_Constants.success))
+//                            {
+//
+//                                JSONObject jobjinner = new JSONObject(jObj.getString(Global_Constants.Message));
+//
+//                                StoreData.write(getActivity(), new VehicleInfo(jobjinner.optString("ModelName"), jobjinner.optString("ManufactorName"), jobjinner.optString("LastUpdatedOn"), jobjinner.optString("VehicleImageURL"), jobjinner.optString("LicensePlate")));
+//
+//
+//                                SharedPrefHelper.editPref(getActivity(), jobjinner.optString("LastUpdatedOn"));
+//
+//                            }
+//
+//                        }
+//                        catch (Exception | Error e)
+//                        {
+//
+//                            e.printStackTrace();
+//                        }
+//
+//
+//                    }
+//                }).execute();
 //            }
 //        });
 //    }
@@ -167,12 +292,6 @@ public class Home extends android.support.v4.app.Fragment
 
         Tracking_fragment.vTracking = null;
     }
-
-
-
-
-
-
 
 
 }

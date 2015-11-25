@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import car.gagan.cobratotrackit.R;
 
@@ -55,6 +58,9 @@ public class Verfication_Screen extends AppCompatActivity
         isMobileVerification = intn.getBooleanExtra(ISMOBILE_VERIFICATION, false);
 
 
+        ((TextView) findViewById(R.id.txtv)).setText(isMobileVerification ? getString(R.string.enter_sms_code) : getString(R.string.enter_keypad_code));
+
+
         shrd = getSharedPreferences(Global_Constants.shared_pref_name, Context.MODE_PRIVATE);
         utilss = new Utills_G();
 
@@ -69,6 +75,17 @@ public class Verfication_Screen extends AppCompatActivity
         txt1.addTextChangedListener(new text(txt1));
         txt2.addTextChangedListener(new text(txt2));
         txt3.addTextChangedListener(new text(txt3));
+
+
+        txt2.setOnKeyListener(new onKeypressEdittext(txt2));
+        txt3.setOnKeyListener(new onKeypressEdittext(txt3));
+        txt4.setOnKeyListener(new onKeypressEdittext(txt4));
+
+
+        txt2.setOnFocusChangeListener(new onFocusG(txt2));
+        txt3.setOnFocusChangeListener(new onFocusG(txt3));
+        txt1.setOnFocusChangeListener(new onFocusG(txt1));
+
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(txt1, InputMethodManager.SHOW_IMPLICIT);
@@ -189,14 +206,14 @@ public class Verfication_Screen extends AppCompatActivity
             }
             else
             {
-                new Utills_G().show_dialog_msg(Verfication_Screen.this, jObj.getString(Global_Constants.Message), null);
+                Utills_G.show_dialog_msg(Verfication_Screen.this, jObj.getString(Global_Constants.Message), null);
             }
 
 
         }
         catch (Exception e)
         {
-            new Utills_G().show_dialog_msg(Verfication_Screen.this, getString(R.string.please_try_again), null);
+            Utills_G.show_dialog_msg(Verfication_Screen.this, getString(R.string.please_try_again), null);
             e.printStackTrace();
         }
 
@@ -235,6 +252,71 @@ public class Verfication_Screen extends AppCompatActivity
     }
 
 
+    class onFocusG implements View.OnFocusChangeListener
+    {
+        EditText ed;
+
+        public onFocusG(EditText ed)
+        {
+            this.ed = ed;
+        }
+
+        @Override
+        public void onFocusChange(View view, boolean b)
+        {
+            if (!ed.getText().toString().isEmpty())
+            {
+                if (ed.isFocused())
+                {
+                    ed.setSelection(0, 1);
+                }
+            }
+        }
+    }
+
+    class onKeypressEdittext implements View.OnKeyListener
+    {
+        EditText ed;
+
+        public onKeypressEdittext(EditText ed)
+        {
+            this.ed = ed;
+        }
+
+        @Override
+        public boolean onKey(View view, int i, KeyEvent keyEvent)
+        {
+
+
+            if (i == KeyEvent.KEYCODE_DEL)
+            {
+                if (ed.getText().toString().isEmpty())
+                {
+                    if (ed.getId() == R.id.txtCode2)
+                    {
+
+
+                        txt1.requestFocus();
+
+                    }
+                    else if (ed.getId() == R.id.txtCode3)
+                    {
+
+                        txt2.requestFocus();
+
+                    }
+                    else if (ed.getId() == R.id.txtCode4)
+                    {
+
+                        txt3.requestFocus();
+
+                    }
+                }
+            }
+            return false;
+        }
+    }
+
     public static class text implements TextWatcher
     {
         EditText ed;
@@ -245,7 +327,7 @@ public class Verfication_Screen extends AppCompatActivity
         }
 
         @Override
-        public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3)
+        public void onTextChanged(final CharSequence s, int arg1, int arg2, int arg3)
         {
             if (ed.getId() == R.id.txtCode1)
             {
@@ -267,6 +349,20 @@ public class Verfication_Screen extends AppCompatActivity
                 {
                     txt1.requestFocus();
                 }
+                else if (s.length() > 1)
+                {
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(new Runnable()
+                    {
+                        public void run()
+                        {
+                            String enter = new String(s.toString().substring(1));
+                            ed.setText(enter);
+
+                        }
+                    });
+                }
+
                 else
                 {
                     txt3.requestFocus();
@@ -277,6 +373,19 @@ public class Verfication_Screen extends AppCompatActivity
                 if (ed.getText().toString().trim().equals(""))
                 {
                     txt2.requestFocus();
+                }
+                else if (s.length() > 1)
+                {
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(new Runnable()
+                    {
+                        public void run()
+                        {
+                            String enter = new String(s.toString().substring(1));
+                            ed.setText(enter);
+
+                        }
+                    });
                 }
                 else
                 {

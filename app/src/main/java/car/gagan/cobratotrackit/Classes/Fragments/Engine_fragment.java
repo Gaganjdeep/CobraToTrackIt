@@ -81,18 +81,7 @@ public class Engine_fragment extends BaseFragmentHome implements View.OnClickLis
                         if (dialog != null && dialog.isShowing())
                             dialog.dismiss();
 
-                        try
-                        {
-                            JSONObject jObj = new JSONObject(output);
-
-                            new Utills_G().show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
-
-
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
+                        showResponse(output);
 
 
 
@@ -114,18 +103,7 @@ public class Engine_fragment extends BaseFragmentHome implements View.OnClickLis
                             dialog.dismiss();
 
 
-                        try
-                        {
-                            JSONObject jObj = new JSONObject(output);
-
-                            new Utills_G().show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
-
-
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
+                        showResponse(output);
 
 
                     }

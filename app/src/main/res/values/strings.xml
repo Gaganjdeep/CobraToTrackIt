@@ -53,8 +53,8 @@
     <string name="lights">Lights</string>
     <string name="lock">Lock</string>
     <string name="engine">Engine</string>
-    <string name="average_speed">Average Speed</string>
-    <string name="top_speed">Top Speed</string>
+    <string name="average_speed">Average Speed KPH</string>
+    <string name="top_speed">Top Speed KPH</string>
     <string name="do_u_want_to_logout">Do you want to log out.</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -68,6 +68,10 @@
     <string name="title_activity_trip_report"></string>
     <string name="driving_time">"Driving Time: "</string>
     <string name="parking_time">"Parking Time: "</string>
+    <string name="updating_info">Updating information</string>
+    <string name="unit_not_connected">Unit is not connected to server or Error occurred on server</string>
+    <string name="enter_sms_code">please enter the Verification Code sent to you by SMS</string>
+    <string name="enter_keypad_code">please enter your keypad code</string>
 
 
 </resources>

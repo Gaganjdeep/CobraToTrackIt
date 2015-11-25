@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,22 +93,18 @@ public class LocationFragment extends BaseFragmentHome
         layoutShowRoute = (LinearLayout) view.findViewById(R.id.layoutShowRoute);
         btnEngineStatus = (FloatingActionButton) view.findViewById(R.id.btnEngineStatus);
         btnbatteryStatus = (FloatingActionButton) view.findViewById(R.id.btnbatteryStatus);
+
+        settingSwipeToRefresh(view);
+
     }
 
 
     @Override
     public void onResume()
     {
-        if (mapFragment == null)
-        {
-            initializeMapFragment();
-        }
-
-        setUpMapIfNeeded();
 
 
         new SendGetPositionMessage(getUnitID()).execute();
-
 
 
         super.onResume();
@@ -136,6 +133,7 @@ public class LocationFragment extends BaseFragmentHome
         }
     }
 
+    GoogleMap mapG;
 
     private void setUpMapIfNeeded()
     {
@@ -145,10 +143,47 @@ public class LocationFragment extends BaseFragmentHome
             @Override
             public void onMapReady(GoogleMap gMap)
             {
-
+                mapG = gMap;
                 getData(gMap);
             }
         });
+    }
+
+    SwipeRefreshLayout swipeLayout;
+
+    private void settingSwipeToRefresh(View v)
+    {
+
+        swipeLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeLayout);
+        swipeLayout.setColorSchemeResources(
+                R.color.red,
+                R.color.grey,
+                R.color.red);
+
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+        {
+            @Override
+            public void onRefresh()
+            {
+
+
+                if (mapG != null)
+                {
+                    getData(mapG);
+                }
+                else
+                {
+                    if (mapFragment == null)
+                    {
+                        initializeMapFragment();
+                    }
+
+                    setUpMapIfNeeded();
+                }
+
+            }
+        });
+
     }
 
 
@@ -161,7 +196,6 @@ public class LocationFragment extends BaseFragmentHome
             @Override
             public void webOnFinish(String output)
             {
-
 
                 try
                 {
@@ -191,20 +225,14 @@ public class LocationFragment extends BaseFragmentHome
 
                         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 12.0f));
 
-
+                        ((TextView) rootView.findViewById(R.id.txtv_odometer)).setText(jobjinner.optString("Odometer"));
 //                        "EngineOnOff":"True",
 
-                        btnEngineStatus.setBackgroundTintList(ColorStateList.valueOf(jobjinner.getString("EngineOnOff").equals("True") ? getResources().getColor(R.color.green) : getResources().getColor(R.color.black)));
+                        btnEngineStatus.setBackgroundTintList(ColorStateList.valueOf(jobjinner.getString("EngineOnOff").equals("True") ? getResources().getColor(R.color.green) : getResources().getColor(R.color.red)));
 
-//                        ,"BatteryHealth":"13.4605264663696"
-
-                        double batteryPercentage = Double.parseDouble(jobjinner.getString("BatteryHealth"));
-
-
-                        btnbatteryStatus.setBackgroundTintList(ColorStateList.valueOf(batteryPercentage > 50.0 ? getResources().getColor(R.color.green) : (batteryPercentage > 20.0 ? getResources().getColor(R.color.orange) : getResources().getColor(R.color.red))));
-
-
-                        ((TextView) rootView.findViewById(R.id.txtv_odometer)).setText(jobjinner.optString("Odometer"));
+//                        double batteryPercentage = Double.parseDouble(jobjinner.getString("BatteryHealth"));
+//                        btnbatteryStatus.setBackgroundTintList(ColorStateList.valueOf(batteryPercentage > 50.0 ? getResources().getColor(R.color.green) : (batteryPercentage > 20.0 ? getResources().getColor(R.color.orange) : getResources().getColor(R.color.red))));
+                        btnbatteryStatus.setBackgroundTintList(ColorStateList.valueOf(jobjinner.getString("VehicleBattery").equals("True") ? getResources().getColor(R.color.red) : getResources().getColor(R.color.green)));
 
 
                     }
@@ -214,6 +242,8 @@ public class LocationFragment extends BaseFragmentHome
 
                     e.printStackTrace();
                 }
+
+                swipeLayout.setRefreshing(false);
 
             }
         }).execute();

@@ -6,6 +6,12 @@
               android:orientation="vertical"
               android:padding="10dp">
 
+
+    <LinearLayout
+        android:id="@+id/layoutAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <TextView
         android:id="@+id/txtv_StartAddress"
         android:layout_width="match_parent"
@@ -21,7 +27,7 @@
         android:text="Cosor Senopia,122..italy"
         android:textColor="@color/red"
         />
-
+    </LinearLayout>
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardV"

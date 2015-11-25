@@ -23,6 +23,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -48,7 +49,7 @@ public class Notification extends BaseFragmentHome
 
     private static List<EventsModel> listData;
     NotificationAdapter adapter;
-    private static int daysBack = 4;
+    private static int daysBack = 7;
     ProgressBar progressBarNotification;
 
     public Notification()
@@ -99,7 +100,7 @@ public class Notification extends BaseFragmentHome
         }
 
 
-        getData(DateUtilsG.getStartDate(daysBack), DateUtilsG.getCurrentDate(), getVehicleID(), selectedLanguage());
+        getData(DateUtilsG.getStartDate(daysBack), DateUtilsG.getCurrentDateWithAddedDays(1), getVehicleID(), selectedLanguage());
 
 
         return v;
@@ -177,6 +178,8 @@ public class Notification extends BaseFragmentHome
 
                         if (adapter == null)
                         {
+                            Collections.reverse(listData);
+
                             adapter = new NotificationAdapter(getActivity(), listData);
                             listVnotifications.setAdapter(adapter);
                             listVnotifications.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -191,6 +194,8 @@ public class Notification extends BaseFragmentHome
                         }
                         else
                         {
+                            Collections.reverse(listData);
+
                             adapter.notifyDataSetChanged();
                         }
 

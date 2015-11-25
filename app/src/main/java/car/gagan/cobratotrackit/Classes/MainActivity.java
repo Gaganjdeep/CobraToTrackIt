@@ -19,7 +19,6 @@ import car.gagan.cobratotrackit.Classes.Fragments.Home;
 import car.gagan.cobratotrackit.Classes.Fragments.LocationFragment;
 import car.gagan.cobratotrackit.Classes.Fragments.Notification;
 import car.gagan.cobratotrackit.Classes.Fragments.Settings;
-import car.gagan.cobratotrackit.Classes.Fragments.TripReport;
 import car.gagan.cobratotrackit.Classes.Fragments.TripReportDaily;
 import car.gagan.cobratotrackit.R;
 
@@ -124,6 +123,11 @@ public class MainActivity extends AppCompatActivity
                         {
                             Intent intent = new Intent(Home.BROADCAST_OPENDIALOG);
                             sendBroadcast(intent);
+                        }
+                        else
+                        {
+                            mViewpager.setCurrentItem(0);
+
                         }
                     }
                 });

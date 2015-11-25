@@ -22,6 +22,15 @@ public class DateUtilsG
 
     }
 
+    public static String getCurrentDateWithAddedDays(int daysBack)
+    {
+        Calendar cal = GregorianCalendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.DAY_OF_YEAR, +daysBack);
+        return sdf.format(cal.getTime());
+
+    }
+
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public static String getCurrentDate()

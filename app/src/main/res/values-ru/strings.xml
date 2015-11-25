@@ -75,8 +75,10 @@
     <string name="lights">Фары</string>
     <string name="engine">Двигатель</string>
     <string name="lock">Запереть</string>
-    <string name="average_speed">Средняя скорость</string>
-    <string name="top_speed">Макс. Скорость</string>
+
+
+    <string name="average_speed">Средняя скорость KPH</string>
+    <string name="top_speed">Макс. Скорость KPH</string>
 
     <string name="do_u_want_to_logout">Вы хотите выйти</string>
 
@@ -98,6 +100,10 @@
     <string name="done">сделанный</string>
     <string name="driving_time">"Время поездки: "</string>
     <string name="parking_time">"Парковка Время: "</string>
+    <string name="updating_info">Обновление информации</string>
+    <string name="unit_not_connected">Устройство не подключается к серверу или произошла ошибка на сервере</string>
+    <string name="enter_sms_code">пожалуйста, введите проверочный код высланы вам по SMS</string>
+    <string name="enter_keypad_code">введите ваш код клавиатура</string>
 
 
 </resources>

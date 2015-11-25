@@ -85,18 +85,7 @@ public class Lock_fragment extends BaseFragmentHome implements View.OnClickListe
                             dialog.dismiss();
 
 
-                        try
-                        {
-                            JSONObject jObj = new JSONObject(output);
-
-                            new Utills_G().show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
-
-
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
+                        showResponse(output);
 
 
 
@@ -116,18 +105,7 @@ public class Lock_fragment extends BaseFragmentHome implements View.OnClickListe
                         if (dialog != null && dialog.isShowing())
                             dialog.dismiss();
 
-                        try
-                        {
-                            JSONObject jObj = new JSONObject(output);
-
-                            new Utills_G().show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
-
-
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
+                        showResponse(output);
 
 
                     }
@@ -150,18 +128,7 @@ public class Lock_fragment extends BaseFragmentHome implements View.OnClickListe
                             dialog.dismiss();
 
 
-                        try
-                        {
-                            JSONObject jObj = new JSONObject(output);
-
-                            new Utills_G().show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
-
-
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
+                        showResponse(output);
 
 
                     }

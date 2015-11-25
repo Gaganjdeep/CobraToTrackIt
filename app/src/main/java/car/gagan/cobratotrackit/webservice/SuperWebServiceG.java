@@ -2,7 +2,6 @@ package car.gagan.cobratotrackit.webservice;
 
 import android.os.AsyncTask;
 
-
 import java.util.HashMap;
 
 import car.gagan.cobratotrackit.utills.CallBackWebService;

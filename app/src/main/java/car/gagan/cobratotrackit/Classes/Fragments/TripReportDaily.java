@@ -88,7 +88,7 @@ public class TripReportDaily extends BaseFragmentHome
         }
 
 
-        gethistory(DateUtilsG.getStartDate(daysBack), DateUtilsG.getCurrentDate(), getVehicleID(), selectedLanguage());
+        gethistory(DateUtilsG.getStartDate(daysBack), DateUtilsG.getCurrentDateWithAddedDays(1), getVehicleID(), selectedLanguage());
 
         return v;
     }

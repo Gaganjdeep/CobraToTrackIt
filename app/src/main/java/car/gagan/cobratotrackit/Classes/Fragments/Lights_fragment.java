@@ -92,18 +92,7 @@ public class Lights_fragment extends BaseFragmentHome implements View.OnClickLis
                             dialog.dismiss();
 
 
-                        try
-                        {
-                            JSONObject jObj = new JSONObject(output);
-
-                            Utills_G.show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
-
-
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
+                        showResponse(output);
 
 
                     }
@@ -124,18 +113,7 @@ public class Lights_fragment extends BaseFragmentHome implements View.OnClickLis
                             dialog.dismiss();
 
 
-                        try
-                        {
-                            JSONObject jObj = new JSONObject(output);
-
-                            Utills_G.show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
-
-
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
+                        showResponse(output);
 
                     }
                 }).execute();

@@ -325,7 +325,7 @@ public class Utills_G
 
     public static void startGoogleMaps(Context con, LatLng ltlng)
     {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?daddr=" + ltlng.latitude + "," + ltlng.longitude));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?daddr=" + ltlng.latitude + "," + ltlng.longitude + "&mode=w"));
         con.startActivity(intent);
     }
 

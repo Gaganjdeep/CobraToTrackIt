@@ -7,6 +7,10 @@ public class Global_Constants
 {
 
     public final static String shared_pref_name = "Cobra_SharedPref";
+
+    public final static String SHAREDPREF_VEHICLE_INFO = "CobraG_SharedPref";
+
+
     public final static String Status = "Status";
     public final static String Message = "Message";
     public final static String success = "success";
@@ -48,11 +52,12 @@ public class Global_Constants
 
 
     //                                                     9/24/2015 2:27:11 AM
-    public final static String SERVERTIME_FORMAT = "MM/dd/yyyy HH:mm:ss a";
+    public final static String SERVERTIME_FORMAT = "MM/dd/yyyy hh:mm:ss a";
 
     //    public final static String TIMEFORMAT_HISTORY = "EEE dd MMMM yyyy,hh:mm a";
     public final static String TIMEFORMAT_HISTORY = "hh:mm a";
     public final static String TIMEFORMAT_NOTIFICATION = "dd-MM-yyyy | HH:mm";
 
     public final static String TIMEFORMAT_TRIP_DAILY = "dd/MM/yyyy";
+    public final static String LAST_UPDATED_ON = "dd/MM/yyyy HH:mm:ss";
 }

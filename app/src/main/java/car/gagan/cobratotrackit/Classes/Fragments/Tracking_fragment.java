@@ -90,18 +90,7 @@ public class Tracking_fragment extends BaseFragmentHome implements View.OnClickL
                             dialog.dismiss();
 
 
-                        try
-                        {
-                            JSONObject jObj = new JSONObject(output);
-
-                            new Utills_G().show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
-
-
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
+                        showResponse(output);
 
 
 
@@ -121,18 +110,7 @@ public class Tracking_fragment extends BaseFragmentHome implements View.OnClickL
                             dialog.dismiss();
 
 
-                        try
-                        {
-                            JSONObject jObj = new JSONObject(output);
-
-                            new Utills_G().show_dialog_msg(getActivity(), jObj.getString(Global_Constants.Message), null);
-
-
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
+                        showResponse(output);
 
 
                     }

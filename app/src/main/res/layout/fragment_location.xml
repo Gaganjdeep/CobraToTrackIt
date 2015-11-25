@@ -27,7 +27,15 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <ScrollView
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -93,7 +101,7 @@
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:paddingTop="5dp"
-                    android:text="127"
+                    android:text=""
                     android:textColor="@color/red"
                     android:textSize="27sp"/>
 
@@ -207,4 +215,6 @@
         </LinearLayout>
 
     </ScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
